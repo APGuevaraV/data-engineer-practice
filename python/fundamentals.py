@@ -33,6 +33,8 @@ lists = []
 for letra in letras:
     apariciones = text.count(letra)
     lists.append((letra, apariciones))
-    
+
 print(dict(lists))
-    
+
+lista_de_pares = [x for x in range(1, 101) if x % 2 == 0]
+print(lista_de_pares)
