@@ -75,3 +75,9 @@ group by customers.customer_id order by  total_gastado desc;
 select * from customers left join orders
 on customers.customer_id = orders.customer_id
 where orders.order_id is null;
+
+select customers.departamento,
+sum(customers.salario) as total_de_salario,
+count(customers.customer_id) as cantida_empleados
+from customers
+group by customers.departamento;
