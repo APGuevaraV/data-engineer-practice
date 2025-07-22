@@ -79,3 +79,23 @@ def fibonacci(n):
 
 
 print(fibonacci(2))
+
+# Generador de reportes con formato opcional
+
+
+def generar_reporte(*datos, encabezado=True):
+    if encabezado:
+        print('Reporte:')
+        for x in datos:
+            print(x, end='|')
+
+
+generar_reporte('Ana', 'Juego', 12, 'Paraguas', encabezado=True)
+
+
+def validar_enteros(*numeros):
+    return [True if numero > 0 else False for numero in numeros]
+
+
+print()
+print(validar_enteros(5, 7, 9, 4, -5, -7, 8, 12, -654, 74, 785, -323))
