@@ -57,3 +57,25 @@ from station
 where CHAR_LENGTH(city) 
 in ( select max(CHAR_LENGTH(city)) from station )
 order by city limit 1)
+
+
+SELECT candidate_id FROM candidates where skill in ('Python','Tableau','PostgreSQL') 
+GROUP by candidate_id 
+HAVING
+count(DISTINCT(skill)) = 3 
+order by candidate_id asc;
+
+--Write a query to find the node type of Binary Tree ordered by the value of the node. Output one of the following for each node:
+
+--Root: If node is root node.
+--Leaf: If node is leaf node.
+--Inner: If node is neither root nor leaf node.
+
+select n,
+case
+    WHEN p is null THEN 'Root'
+    WHEN n in (select p from bst) THEN 'Inner'
+    else 'Leaf'
+end
+from bst 
+order by n;
