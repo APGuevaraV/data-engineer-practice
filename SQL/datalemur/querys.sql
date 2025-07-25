@@ -47,3 +47,18 @@ GROUP by users.city
 ORDER BY total_orders DESC
 LIMIT 3
 ;
+
+/*
+Write a query to identify the top 2 Power Users who sent the highest number
+ of messages on Microsoft Teams in August 2022. Display the IDs of these 2 
+ users along with the total number of messages they sent. Output the results
+  in descending order based on the count of the messages.
+*/
+
+SELECT sender_id, count(sender_id) from messages 
+where 
+DATE_PART('year', sent_date) = 2022 and 
+EXTRACT(MONTH FROM sent_date) = 8
+GROUP by sender_id
+ORDER by count(*) desc
+limit 2;
