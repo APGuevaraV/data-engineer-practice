@@ -62,3 +62,4 @@ EXTRACT(MONTH FROM sent_date) = 8
 GROUP by sender_id
 ORDER by count(*) desc
 limit 2;
+
