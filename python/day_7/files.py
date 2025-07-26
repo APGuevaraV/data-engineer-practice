@@ -6,7 +6,7 @@ usuarios = [
     {"nombre": "María", "edad": 28, "email": "maria@example.com"}
 ]
 
-with open('usuarios.cv', 'w', newline='\n', encoding='utf8') as csvfile:
+with open('usuarios.csv', 'w', newline='\n', encoding='utf8') as csvfile:
     campos = ['nombre', 'edad', 'email']
     writer = csv.DictWriter(csvfile, fieldnames=campos)
     writer.writeheader()
