@@ -46,3 +46,15 @@ delimiter ;
 
 call AgregarProducto('dento',4,10);
 call ActualizarStock(2,2);
+
+delimiter //
+create procedure VentasPorCliente(clienteId int,fechaInicio date, fechafin date)
+begin
+	select * from ventas 
+    where  fecha between fechaInicio and fechafin
+    AND cliente_id = clienteId
+    ORDER BY fecha DESC;
+end //
+delimiter ;
+
+call VentasPorCliente('8','2024-07-01','2024-07-30');
