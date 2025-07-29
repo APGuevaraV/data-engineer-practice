@@ -71,3 +71,20 @@ create procedure TotalVentasPorProducto (productoId int)
 end //
 
 call TotalVentasPorProducto(3);
+
+
+delimiter //
+create procedure ClienteTopCompras ()
+	begin
+		select  
+        c.cliente_id,
+		c.nombre AS cliente_nombre,
+		sum(v.total) as total_compra
+		from Ventas v
+        INNER JOIN Clientes c ON v.cliente_id = c.cliente_id
+		group by c.cliente_id,c.nombre
+        order by total_compra desc 
+        limit 1;
+	end //
+delimiter ;
+call ClienteTopCompras;
