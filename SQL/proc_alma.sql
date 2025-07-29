@@ -58,3 +58,16 @@ end //
 delimiter ;
 
 call VentasPorCliente('8','2024-07-01','2024-07-30');
+
+
+delimiter //
+create procedure TotalVentasPorProducto (productoId int)
+	begin
+	select producto_id,
+	sum(cantidad * precio_unitario)
+	from DetalleVenta 
+	where producto_id = productoId
+	group by producto_id ;
+end //
+
+call TotalVentasPorProducto(3);
