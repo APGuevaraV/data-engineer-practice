@@ -126,3 +126,17 @@ begin
 end
  //
 delimiter ;
+
+
+delimiter //
+create procedure TotalVentasProducto(in productoId int, out total_ventas float)
+begin
+	
+    SELECT IFNULL(SUM(cantidad * precio_unitario), 0)
+	into total_ventas
+    from DetalleVenta where producto_id = productoId;
+end //
+delimiter ;
+
+CALL TotalVentasProducto(1, @total);
+SELECT @total as totalvendido;
