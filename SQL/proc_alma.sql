@@ -88,3 +88,22 @@ create procedure ClienteTopCompras ()
 	end //
 delimiter ;
 call ClienteTopCompras;
+
+
+delimiter //
+create procedure UpsertCliente( in clienteId int,in nombreIn varchar(100), in correoIn varchar(100))
+	begin
+		declare findCliente int;
+        select count(*) into findCliente from clientes where cliente_id = clienteId;
+        if exists (select 1 from clientes where cliente_id = clienteId) THEN
+			Update clientes 
+            set nombre = nombreIn ,
+				correo = correoIn
+			where cliente_id= clienteId;
+            select 'Actualizado correctamente' as status;
+		ELSE
+			insert into clientes(cliente_id,nombre,correo) values(clienteId,nombreIn,correoIn);
+            select 'Nuevo registro' as status;
+		end if;
+    end //
+delimiter ;
