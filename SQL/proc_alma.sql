@@ -93,8 +93,7 @@ call ClienteTopCompras;
 delimiter //
 create procedure UpsertCliente( in clienteId int,in nombreIn varchar(100), in correoIn varchar(100))
 	begin
-		declare findCliente int;
-        select count(*) into findCliente from clientes where cliente_id = clienteId;
+		
         if exists (select 1 from clientes where cliente_id = clienteId) THEN
 			Update clientes 
             set nombre = nombreIn ,
@@ -106,4 +105,24 @@ create procedure UpsertCliente( in clienteId int,in nombreIn varchar(100), in co
             select 'Nuevo registro' as status;
 		end if;
     end //
+delimiter ;
+
+
+delimiter //
+create procedure AumentarPreciosCategoria(in categoriaId int , in porcentaje float)
+begin
+	if exists (select 1 from categorias where categoria_id = categoriaId) and porcentaje > 0 THEN
+		update productos 
+		set precio = precio*(1+porcentaje/100)  
+		where producto_id in (
+				select p.producto_id 
+				from (select producto_id from productos 
+				where categoria_id = categoriaId) as p
+                );
+        select 'actualizada la categoría' as status;
+	else
+    select 'Categoría no encontrada' as status;
+    end if;
+end
+ //
 delimiter ;
