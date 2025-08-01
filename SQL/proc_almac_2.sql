@@ -18,4 +18,22 @@ end
  //
 delimiter ;
 
-call DeshabilitarClientesInactivos;
+call DeshabilitarClientesInactivos();
+
+
+delimiter //
+create procedure ResumenVentasDiario(IN fecha_inicio DATE, IN fecha_fin DATE)
+begin
+	with CTE_Ventas_por_dia as(
+		select fecha,
+        count(*) as total_ventas,
+        sum(total) as total_ingresos
+        from ventas_fecha group by fecha
+    )
+    select * from CTE_Ventas_por_dia where fecha 
+    between fecha_inicio AND fecha_fin;
+end
+//
+delimiter ;
+
+call ResumenVentasDiario('2025-06-01', '2025-07-31');
