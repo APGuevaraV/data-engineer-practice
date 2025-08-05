@@ -83,3 +83,11 @@ left join ventas v2
 on clientes_union.id_cliente = v2.id_cliente
 and v2.id_producto=101
 where v2.id_venta is null;
+
+select c.nombre 
+from clientes c 
+join ventas v
+on c.id_cliente=v.id_cliente
+group by c.id_cliente
+having count(v.id_venta) = 1;
+
