@@ -44,3 +44,18 @@ EXCEPT
 SELECT p.id_producto
 FROM Producto p
 JOIN Ventas v ON p.id_producto = v.id_producto
+
+
+(select c.nombre
+from clientes c 
+join ventas v 
+on c.id_cliente=v.id_cliente
+group by c.id_cliente)
+union all
+(
+select c.nombre from clientes c
+left join ventas v 
+on c.id_cliente=v.id_cliente
+where v.id_venta is null
+); 
+
