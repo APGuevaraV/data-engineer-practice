@@ -104,3 +104,15 @@ on p.id_producto = v.id_producto
 group by p.id_producto, nombre_producto
 having count(v.id_venta) =1
 );
+
+-- union
+(
+select c.nombre
+from clientes c
+join ventas v
+on c.id_cliente = v.id_cliente
+)
+union
+(select c2.nombre
+from clientes c2
+where left(c2.nombre,1)='L');
