@@ -135,3 +135,20 @@ left join ventas v2
 on clientes_audifonos.id_cliente = v2.id_cliente
 and v2.id_producto=103
 where v2.id_venta is null;
+
+--Lista de productos que nunca han sido vendidos o que fueron comprados solo por un cliente distinto.
+
+(select v.id_producto,p.nombre_producto
+from productos p 
+left join ventas v 
+on p.id_producto = v.id_producto
+where v.id_venta is null)
+union
+(
+select v2.id_producto,p2.nombre_producto
+from productos p2 
+join ventas v2 
+on p2.id_producto = v2.id_producto
+group by v2.id_producto,p2.nombre_producto
+having count(v2.id_cliente) = 1
+)
