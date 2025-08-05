@@ -183,3 +183,17 @@ where v.id_cliente in (
     from clientes c
     where left(c.nombre,1) in ('A','M')
 );
+
+--Clientes que han comprado Laptop y Tablet, y además han comprado más de 2 productos en total.
+select v.id_cliente,c.nombre
+from clientes c
+join ventas v
+on c.id_cliente = v.id_cliente
+where v.id_producto = 101
+and v.id_cliente in (
+    select v2.id_cliente
+    from ventas v2
+    where v2.id_producto = 103
+)
+group by v.id_cliente,c.nombre
+having count(v.id_venta) > 2;
