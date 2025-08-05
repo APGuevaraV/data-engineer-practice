@@ -116,3 +116,10 @@ union
 (select c2.nombre
 from clientes c2
 where left(c2.nombre,1)='L');
+
+select v.id_producto,p.nombre_producto
+from ventas v
+join productos p 
+on v.id_producto=p.id_producto
+group by p.id_producto,p.nombre_producto
+having count(distinct(v.id_cliente)) >1;
