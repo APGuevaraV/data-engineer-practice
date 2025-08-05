@@ -91,3 +91,16 @@ on c.id_cliente=v.id_cliente
 group by c.id_cliente
 having count(v.id_venta) = 1;
 
+(select nombre_producto
+from productos p 
+left join ventas v
+on p.id_producto = v.id_producto
+where v.id_venta is null)
+union
+(select nombre_producto
+from productos p 
+join ventas v
+on p.id_producto = v.id_producto
+group by p.id_producto, nombre_producto
+having count(v.id_venta) =1
+);
