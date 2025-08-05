@@ -123,3 +123,15 @@ join productos p
 on v.id_producto=p.id_producto
 group by p.id_producto,p.nombre_producto
 having count(distinct(v.id_cliente)) >1;
+
+-- except
+select distinct clientes_audifonos.nombre
+from
+(select c.id_cliente,c.nombre
+from clientes c 
+join ventas v on c.id_cliente=v.id_cliente
+where v.id_producto=104) as clientes_audifonos
+left join ventas v2
+on clientes_audifonos.id_cliente = v2.id_cliente
+and v2.id_producto=103
+where v2.id_venta is null;
