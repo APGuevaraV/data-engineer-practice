@@ -171,3 +171,15 @@ select distinct laptop_tablets.nombre from
 	on v3.id_cliente = laptop_tablets.id_cliente
 	and v3.id_producto = 103
 	where v3.id_venta is null;
+
+--Lista de productos que han sido comprados por clientes cuyo nombre empieza con 'A' o 'M'.
+
+select distinct p.nombre_producto
+from productos p
+join ventas v
+on p.id_producto = v.id_producto
+where v.id_cliente in (
+    select c.id_cliente
+    from clientes c
+    where left(c.nombre,1) in ('A','M')
+);
