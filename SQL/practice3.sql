@@ -59,3 +59,9 @@ on c.id_cliente=v.id_cliente
 where v.id_venta is null
 ); 
 
+select nombre_producto
+from productos p 
+inner join ventas v
+on p.id_producto = v.id_producto
+group by p.id_producto,nombre_producto
+having count(v.id_venta)>1;
