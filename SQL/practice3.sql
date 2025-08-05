@@ -65,3 +65,21 @@ inner join ventas v
 on p.id_producto = v.id_producto
 group by p.id_producto,nombre_producto
 having count(v.id_venta)>1;
+
+select distinct clientes_union.nombre
+from
+(
+select c.id_cliente,c.nombre
+from clientes c 
+join ventas v on c.id_cliente=v.id_cliente
+where v.id_producto=104
+union
+select c.id_cliente,c.nombre
+from clientes c 
+join ventas v on c.id_cliente=v.id_cliente
+where v.id_producto=103
+) as clientes_union
+left join ventas v2
+on clientes_union.id_cliente = v2.id_cliente
+and v2.id_producto=101
+where v2.id_venta is null;
