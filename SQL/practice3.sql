@@ -152,3 +152,22 @@ on p2.id_producto = v2.id_producto
 group by v2.id_producto,p2.nombre_producto
 having count(v2.id_cliente) = 1
 )
+
+--Clientes que compraron Laptop y Celular, pero no Tablet.
+select distinct laptop_tablets.nombre from 
+(
+		(
+        select c.id_cliente,c.nombre
+		from clientes c 
+		join ventas v on c.id_cliente = v.id_cliente
+		where v.id_producto=101
+        and c.id_cliente in(
+        select v2.id_cliente
+		from ventas v2
+		where v2.id_producto=102)
+        )
+) as laptop_tablets
+	left join ventas v3
+	on v3.id_cliente = laptop_tablets.id_cliente
+	and v3.id_producto = 103
+	where v3.id_venta is null;
