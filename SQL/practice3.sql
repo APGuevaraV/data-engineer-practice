@@ -34,3 +34,13 @@ SELECT DISTINCT c.nombre
 FROM Clientes c
 JOIN Ventas v ON c.id_cliente = v.id_cliente
 WHERE v.id_producto = 101; 
+
+--except
+SELECT p.id_producto
+FROM Producto p 
+
+EXCEPT
+
+SELECT p.id_producto
+FROM Producto p
+JOIN Ventas v ON p.id_producto = v.id_producto
