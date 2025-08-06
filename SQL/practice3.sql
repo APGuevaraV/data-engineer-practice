@@ -197,3 +197,15 @@ and v.id_cliente in (
 )
 group by v.id_cliente,c.nombre
 having count(v.id_venta) > 2;
+
+
+--Lista de clientes que compraron cualquier producto, excluyendo a los que compraron Audífonos.
+select distinct clientes_compas.nombre from
+(select c.id_cliente, c.nombre
+from clientes c
+join ventas v
+on c.id_cliente = v.id_cliente) as clientes_compas
+left join ventas v2
+on clientes_compas.id_cliente = v2.id_cliente
+and v2.id_producto = 104
+where v2.id_venta is null;
