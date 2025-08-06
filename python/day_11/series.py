@@ -25,11 +25,20 @@ print(f"crecimiento porcentual:{crecimiento_porcentual}")
 
 ##
 codigos = pd.Series(['001', '002', '003', '004'])
-enteros = codigos.astype('Int32')
+enteros = codigos.astype(int)
 print(enteros)
 
-enteros = codigos.astype('float')
-print(enteros)
+flotantes = codigos.astype('float')
+print(flotantes)
 codigos = codigos.astype('string')
-codigos_string = 'PROD-'+codigos
-print(codigos_string)
+codigos_s = 'PROD-'+codigos
+print(codigos_s)
+
+##
+calificaciones = pd.Series([18, 12, 15, 14, 20, 9, 16, 11])
+primeros_5 = calificaciones.iloc[:5]
+print(primeros_5)
+nuevas_notas = 1+calificaciones
+print(nuevas_notas)
+aprobados = calificaciones[calificaciones > 13]
+print(aprobados)
