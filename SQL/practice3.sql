@@ -217,3 +217,11 @@ join ventas v
 on p.id_producto = v.id_producto
 group by p.nombre_producto
 having count(distinct v.id_cliente) = 2;
+
+--Clientes que nunca han comprado ningún producto y que su nombre no comienza con las letras 'A' o 'J'.
+select c.nombre
+from clientes c 
+left join ventas v 
+on c.id_cliente= v.id_cliente
+where v.id_venta is null
+and left(c.nombre,1) not in ('A','J');
