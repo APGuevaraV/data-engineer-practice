@@ -42,3 +42,14 @@ nuevas_notas = 1+calificaciones
 print(nuevas_notas)
 aprobados = calificaciones[calificaciones > 13]
 print(aprobados)
+
+##
+sueldos = pd.Series(['1500', '2200', '1800', '2500', '3000', '1200'])
+sueldo_enteros = sueldos.astype(int)
+diez_porciento = (1+(10/100)) * sueldos.astype(float)
+filtrados = diez_porciento[diez_porciento > 2000]
+primeros_3 = diez_porciento[:3]
+print(sueldo_enteros)
+print(diez_porciento)
+print(filtrados)
+print(primeros_3)
