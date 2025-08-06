@@ -21,3 +21,15 @@ print(f"Diferencia :{diferencia}")
 
 crecimiento_porcentual = (febrero.sum() - enero.sum())/enero.sum() * 100
 print(f"crecimiento porcentual:{crecimiento_porcentual}")
+
+
+##
+codigos = pd.Series(['001', '002', '003', '004'])
+enteros = codigos.astype('Int32')
+print(enteros)
+
+enteros = codigos.astype('float')
+print(enteros)
+codigos = codigos.astype('string')
+codigos_string = 'PROD-'+codigos
+print(codigos_string)
