@@ -209,3 +209,11 @@ left join ventas v2
 on clientes_compas.id_cliente = v2.id_cliente
 and v2.id_producto = 104
 where v2.id_venta is null;
+
+--Lista de productos que fueron comprados por exactamente 2 clientes distintos.
+select p.nombre_producto
+from productos p
+join ventas v
+on p.id_producto = v.id_producto
+group by p.nombre_producto
+having count(distinct v.id_cliente) = 2;
