@@ -31,3 +31,10 @@ SELECT
     sueldo,
     NULLIF(TRIM(REPLACE(REPLACE(departamento, CHAR(13), ''), CHAR(10), '')), '') AS departamento
 FROM temp_empleados;
+
+--Obtener sueldo promedio por departamento
+select round(avg(sueldo),2) as promedio,departamento from empleados_real group by(departamento) order by promedio
+desc;
+
+--Contar empleados por cargo
+select count(*) as total, cargo from empleados_real group by(cargo);
