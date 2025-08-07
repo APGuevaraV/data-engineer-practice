@@ -48,4 +48,16 @@ SELECT
 FROM empleados_temp;
 select * from empleados;
 
------
+-----con fecha actual
+INSERT INTO empleados_final (id, nombre, departamento, sueldo, nivel, fecha_carga)
+SELECT 
+    id,
+    nombre,
+    departamento,
+    sueldo,
+    CASE 
+        WHEN sueldo >= 3500 THEN 'Senior'
+        ELSE 'Junior'
+    END,
+    CURDATE()
+FROM empleados_temp;
