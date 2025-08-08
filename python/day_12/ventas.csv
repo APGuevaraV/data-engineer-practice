@@ -1,0 +1,6 @@
+id_venta,producto,categoria,precio,cantidad,fecha
+1,Laptop,Tecnología,3500,2,2024-01-10
+2,Mouse,Tecnología,50,5,2024-01-12
+3,Escritorio,Muebles,450,1,2024-01-15
+4,Silla Gamer,Muebles,850,3,2024-01-18
+5,Tablet,Tecnología,1500,4,2024-01-20
