@@ -1,0 +1,6 @@
+id_pedido,cliente,ciudad,total,fecha
+101,Marta López,Lima,500,2024-03-01
+102,Juan Pérez,Cusco,1200,2024-03-05
+103,Ana Torres,Lima,800,2024-03-07
+104,Luis García,Arequipa,200,2024-03-08
+105,Carla Ramos,Cusco,1500,2024-03-10
