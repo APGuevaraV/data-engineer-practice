@@ -20,3 +20,9 @@ df_result = df_pedidos.groupby('ciudad').agg(
 )
 
 print(df_result)
+
+
+df_inventario = pd.read_csv('inventory.csv')
+df_inventario['valor_total'] = df_inventario['precio']*df_inventario['stock']
+filtered = df_inventario[df_inventario['valor_total'] > 10000]
+print(filtered)
