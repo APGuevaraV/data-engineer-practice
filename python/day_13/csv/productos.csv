@@ -2,7 +2,7 @@ id_producto,producto,categoria,stock,precio,material,FechaIngreso,color
 1,Laptop,Tecnología,5,3500,Plástico,2024-02-01,Negro
 2,Mouse,Tecnología,100,50,Plástico,2024-03-01,Plomo
 3,Silla Gamer,Muebles,20,,Madera,2024-04-01,
-4,Escritorio,Muebles,15,450,Melamina,2024-05-11,Madera
+4,Escritorio,Muebles,25,450,Melamina,2024-05-11,Madera
 5,Impresora,Tecnología,8,1200,Plástico,2024-06-12,Negro
 6,Teclado,Tecnología,60,80,Plástico,2024-07-01,Blanco
 7,Cámara Web,Tecnología,30,200,Plástico,2024-07-15,Negro
