@@ -1,0 +1,16 @@
+id_producto,producto,categoria,stock,precio,material,fecha_ingreso,color
+1,Laptop,Tecnología,5,3500,plastico,2024-02-01,negro
+2,Mouse,Tecnología,100,50,plastico,2024-03-01,plomo
+3,Silla Gamer,Muebles,20,850,madera,2024-04-01,rosado
+4,Escritorio,Muebles,15,450,melamina,2024-05-11,madera
+5,Impresora,Tecnología,8,1200,plastico,2024-06-12,negro
+6,Teclado,Tecnología,60,80,plastico,2024-07-01,blanco
+7,Cámara Web,Tecnología,30,200,plastico,2024-07-15,negro
+8,Lámpara de escritorio,Muebles,25,90,metal,2024-08-01,blanco
+9,Cafetera,Electrodomésticos,18,400,acero,2024-08-12,plateado
+10,Smartphone,Tecnología,12,2500,aluminio,2024-09-05,gris
+11,Auriculares,Tecnología,45,150,plastico,2024-09-18,negro
+12,Estantería,Muebles,10,600,madera,2024-10-02,marrón
+13,Microondas,Electrodomésticos,14,800,acero,2024-10-15,blanco
+14,Tablet,Tecnología,9,1800,aluminio,2024-11-01,gris
+15,Proyector,Tecnología,6,3200,plastico,2024-11-20,blanco
