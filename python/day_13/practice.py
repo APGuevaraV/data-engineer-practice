@@ -35,3 +35,15 @@ print(df)
 # columas a mayusculas
 df.columns = [col.upper() for col in df.columns]
 print(df.columns)
+
+# setear indices
+df_indexed = df.set_index('ID_PRODUCTO')
+print("\n DataFrame con 'id_producto' como índice:\n", df_indexed.head())
+
+df_reset = df_indexed.reset_index()
+print("\n DataFrame con índice reseteado:\n", df_reset.head())
+
+# crear copia del df
+indice_personalizado = df.copy()
+indice_personalizado.index = [f"row_{x}" for x in range(1, len(df)+1)]
+print(indice_personalizado.head())
