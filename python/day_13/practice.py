@@ -10,3 +10,13 @@ print(df.shape)
 # tipos de datos
 print(df.info())
 print(df.describe(include='object'))
+
+
+# ordenarmiento
+sorted_df = df.sort_values(by='precio', ascending=False)
+print(sorted_df)
+sorted_two_fields = df.sort_values(by=['categoria', 'stock'])
+print(sorted_two_fields)
+upper_average = df[df['stock'] > df['stock'].mean()]
+print('Mayor que el promedio en stock:', df['stock'].mean())
+print(upper_average)
