@@ -47,3 +47,19 @@ print("\n DataFrame con índice reseteado:\n", df_reset.head())
 indice_personalizado = df.copy()
 indice_personalizado.index = [f"row_{x}" for x in range(1, len(df)+1)]
 print(indice_personalizado.head())
+
+# practica
+df = df.sort_values(by=['FECHA_INGRESO'], ascending=False)
+print(df)
+
+# filtrado
+filtered_df = df[df['PRECIO_UNITARIO'] > df['PRECIO_UNITARIO'].quantile(0.75)]
+print(filtered_df)
+filtered_df.columns = ["".join(word.capitalize() for word in col.replace(
+    "_", " ").split()) for col in filtered_df.columns]
+print(filtered_df)
+
+reindex = filtered_df.set_index('FechaIngreso')
+print(reindex)
+print(reindex.head(2))
+print(reindex.tail(2))
