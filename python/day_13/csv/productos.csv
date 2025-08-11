@@ -1,7 +1,7 @@
-id_producto,producto,categoria,stock,precio,material,fecha_ingreso,color
+id_producto,producto,categoria,stock,precio,material,FechaIngreso,color
 1,Laptop,Tecnología,5,3500,Plástico,2024-02-01,Negro
 2,Mouse,Tecnología,100,50,Plástico,2024-03-01,Plomo
-3,Silla Gamer,Muebles,20,850,Madera,2024-04-01,
+3,Silla Gamer,Muebles,20,,Madera,2024-04-01,
 4,Escritorio,Muebles,15,450,Melamina,2024-05-11,Madera
 5,Impresora,Tecnología,8,1200,Plástico,2024-06-12,Negro
 6,Teclado,Tecnología,60,80,Plástico,2024-07-01,Blanco
@@ -9,7 +9,7 @@ id_producto,producto,categoria,stock,precio,material,fecha_ingreso,color
 8,Lámpara de escritorio,Muebles,25,90,Metal,2024-08-01,Blanco
 9,Cafetera,Electrodomésticos,18,400,Acero,2024-08-12,Plateado
 10,Smartphone,Tecnología,12,2500,Aluminio,2024-09-05,Gris
-11,Auriculares,Tecnología,45,150,Plástico,2024-09-18,Negro
+11,Auriculares,Tecnología,45,,Plástico,2024-09-18,Negro
 12,Estantería,Muebles,10,600,Madera,2024-10-02,Marrón
 13,Microondas,Electrodomésticos,14,800,Acero,2024-10-15,Blanco
 14,Tablet,Tecnología,9,1800,,2024-11-01,Gris
@@ -17,5 +17,5 @@ id_producto,producto,categoria,stock,precio,material,fecha_ingreso,color
 16,Monitor,Tecnología,20,,Plástico,2024-12-05,Negro
 17,Sofá,Muebles,8,2500,Cuero,2024-12-12,Gris
 18,Plancha,Electrodomésticos,22,300,Acero,2025-01-15,Blanco
-19,Parlante Bluetooth,Tecnología,,600,Plástico,2025-02-02,Azul
+19,Parlante Bluetooth,Tecnología,,,Plástico,2025-02-02,Azul
 20,Refrigeradora,Electrodomésticos,5,4200,Acero,2025-02-15,Plateado
