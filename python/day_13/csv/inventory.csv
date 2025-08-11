@@ -1,4 +1,4 @@
-id_producto,producto,categoria,stock,precio,material,fecha_ingreso,color
+id producto,producto,categoria,stock,precio,material,fecha_ingreso,color
 1,Laptop,Tecnología,5,3500,plastico,2024-02-01,negro
 2,Mouse,Tecnología,100,50,plastico,2024-03-01,plomo
 3,Silla Gamer,Muebles,20,850,madera,2024-04-01,rosado

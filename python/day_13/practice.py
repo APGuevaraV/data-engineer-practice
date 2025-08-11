@@ -20,3 +20,18 @@ print(sorted_two_fields)
 upper_average = df[df['stock'] > df['stock'].mean()]
 print('Mayor que el promedio en stock:', df['stock'].mean())
 print(upper_average)
+
+# columnas a snake
+
+df.columns = [col.strip().lower().replace(" ", "_") for col in df.columns]
+print(df.columns)
+# renombrar columns
+df.rename(columns={
+    'stock': 'inventario',
+    'precio': 'precio_unitario'
+}, inplace=True)
+print(df)
+
+# columas a mayusculas
+df.columns = [col.upper() for col in df.columns]
+print(df.columns)
