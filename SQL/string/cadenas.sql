@@ -38,3 +38,17 @@ from empleados;
 select concat('Empleado:',NombreCompleto,' - ','Departamento:',IFNULL(departamento,'Sin Asignar')) as nombre
 from empleados;
 
+select
+sueldo,
+case
+	WHEN sueldo >= 3000 THEN 'Alto'
+    When sueldo >=2500 and sueldo <3000 THEN 'Medio'
+    else 'Bajo'
+END
+as NivelSueldo
+from empleados;
+
+select
+NombreCompleto,
+IF(FechaIngreso, TIMESTAMPDIFF(YEAR, FechaIngreso, CURDATE()), 'Sin Registro') AS anios_empresa
+from empleados;
