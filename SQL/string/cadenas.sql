@@ -25,3 +25,16 @@ select if(Comision >500,'Sí','No') as bono_extra from empleados;
 select round((comision/nullif(sueldo,0))*100,2 )
 as porcentaje_comision 
 from empleados;
+
+select upper(NombreCompleto) as nombre,
+	length(NombreCompleto) as longitud
+ from empleados;
+
+select 
+date_format(FechaIngreso,'%d/%m/%Y') as fecha,
+date_format(FechaIngreso,'%W') as dia_semana
+from empleados;
+
+select concat('Empleado:',NombreCompleto,' - ','Departamento:',IFNULL(departamento,'Sin Asignar')) as nombre
+from empleados;
+
