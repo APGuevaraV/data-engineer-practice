@@ -31,3 +31,37 @@ CASE
         ELSE TIMESTAMPDIFF(MONTH, fecha_ingreso, CURDATE())
     END AS meses
 from productos;
+
+
+select 
+departamento,
+avg(sueldo) as sueldo_promedio
+from empleados
+group by departamento 
+order by sueldo_promedio desc;
+
+with CTE_promedio as(
+select departamento,avg(ventas) as promedio from empleados group by departamento
+)
+select 
+e.departamento,
+e.nombre,
+e.ventas
+from empleados e
+join CTE_promedio c
+on e.departamento=c.departamento
+where e.ventas > c.promedio;
+
+with cte_categoria as
+(
+select 
+ sueldo,
+ CASE
+	when sueldo >=5000 then 'alto'
+    when sueldo between 3000 and 4999.99 then 'medio'
+    else 'bajo'
+ END as categoria
+ from empleados
+)
+select categoria, sueldo from cte_categoria
+order by categoria,sueldo desc;
