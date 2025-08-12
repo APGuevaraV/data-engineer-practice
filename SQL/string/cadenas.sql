@@ -52,3 +52,44 @@ select
 NombreCompleto,
 IF(FechaIngreso, TIMESTAMPDIFF(YEAR, FechaIngreso, CURDATE()), 'Sin Registro') AS anios_empresa
 from empleados;
+
+select ifnull(Departamento,'Sin Departamento') as depto,
+count(*) as nro_empleados
+from empleados
+GROUP BY IFNULL(Departamento,'Sin Departamento');
+
+select 
+round(avg(sueldo),2) as promedio,
+IFNULL(Departamento,'Sin Departamento') AS departamento
+from empleados
+group by IFNULL(Departamento,'Sin Departamento')  order by promedio desc;
+
+
+select departamento,
+avg(timestampdiff(year,FechaIngreso,CURDATE())) as promedio_anios
+from empleados
+where FechaIngreso is not null
+group by departamento; 
+
+with cte_rangos as (
+select 
+	CASE
+		WHEN sueldo >=3000 THEN 'ALTO'
+		WHEN SUELDO >=2500 AND SUELDO <3000 THEN 'MEDIO'
+		ELSE 'BAJO'
+	END
+as nivel_sueldo,
+ifnull(comision,0) as comision
+from empleados
+)
+select sum(comision),nivel_sueldo
+from cte_rangos
+group by nivel_sueldo;
+
+select 
+departamento,
+min(FechaIngreso) as mas_antiguo,
+max(FechaIngreso) as mas_reciente
+from empleados
+WHERE FechaIngreso IS NOT NULL
+group by departamento;
