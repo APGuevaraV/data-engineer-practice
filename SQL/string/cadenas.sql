@@ -93,3 +93,38 @@ max(FechaIngreso) as mas_reciente
 from empleados
 WHERE FechaIngreso IS NOT NULL
 group by departamento;
+
+
+select substring_index(cliente,' ',1) as nombre,
+upper(categoria) as categoria
+from ventas;
+
+select producto,
+(precio * cantidad)-ifnull(descuento,0) as total_venta
+from ventas;
+
+select 
+categoria,
+sum(cantidad) as cantidad_total,
+round(avg(precio),2) as promedio_precio,
+sum(precio*cantidad) as tota_ventas
+from ventas
+group by categoria;
+
+select 
+CASE 
+        WHEN MONTH(FechaVenta) BETWEEN 1 AND 6 THEN 1
+        ELSE 2
+    END AS semestre,
+	ROUND(SUM(Precio * Cantidad), 2) AS total_ventas
+from ventas
+where year(FechaVenta)=2024
+group by semestre
+order by semestre;
+
+select
+vendedor,
+min(FechaVenta) as primera_venta,
+max(FechaVenta) as ultima_venta
+from ventas
+group by vendedor;
