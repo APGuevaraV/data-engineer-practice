@@ -68,3 +68,20 @@ ped_may_4 = df_pedidos[(df_pedidos['precio_unitario'] > 20)
 print(ped_may_4)
 df_pedidos = df_pedidos.drop('estado', axis=1)
 print(df_pedidos.head())
+
+
+df_ventas = pd.DataFrame({
+    'sucursal': ['Lima', 'Arequipa', 'Lima', 'Trujillo', 'Arequipa', 'Lima'],
+    'producto': ['Arroz', 'Arroz', 'Azúcar', 'Azúcar', 'Aceite', 'Aceite'],
+    'cantidad': [20, 15, 10, 8, 5, 12],
+    'precio': [4, 4.2, 3.5, 3.8, 7.5, 7.0]
+})
+
+vf = df_ventas[(df_ventas['sucursal'] == 'Lima')
+               & (df_ventas['producto'] == 'Arroz')]
+fv = df_ventas[(df_ventas['precio'] > 4) & (df_ventas['cantidad'] >= 10)]
+print(fv)
+
+df_ventas['total_venta'] = df_ventas['cantidad']*df_ventas['precio']
+df_ventas = df_ventas[df_ventas['total_venta'] > 20]
+print(df_ventas)
