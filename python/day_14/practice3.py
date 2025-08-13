@@ -58,3 +58,41 @@ df_text['precio_categoria'] = df_text['precio'].apply(
     else 'Bajo'
 )
 print(df_text)
+
+
+df_inter = pd.DataFrame({
+    'pais': ['Perú', 'Chile', 'Argentina', 'Brasil', 'Perú', 'Chile', 'Perú',
+             'Brasil'],
+    'producto': ['Café', 'Café', 'Azúcar', 'Café', 'Azúcar', 'Cacao', 'Cacao',
+                 'Café'],
+    'cantidad': [15, 20, 8, 25, 30, 5, 12, 10],
+    'precio_usd': [4, 4.2, 3, 4.5, 3.5, 6, 6, 4.2]
+})
+
+df_inter['total_ventas'] = df_inter['cantidad']*df_inter['precio_usd']
+agrupado = df_inter.groupby('pais')['total_ventas'].sum()
+print(agrupado)
+
+ventas_mayores = df_inter[df_inter['total_ventas'] > 100]
+print(ventas_mayores)
+
+pivote_t = pd.pivot_table(
+    df_inter, values=['cantidad'], columns=['producto'],
+    index=['pais'], aggfunc={'cantidad': 'sum'}, fill_value=0)
+print(pivote_t)
+
+
+df_gastos = pd.DataFrame({
+    'mes': ['Enero', 'Enero', 'Febrero', 'Febrero', 'Marzo', 'Marzo', 'Marzo'],
+    'categoria': ['Alimentos', 'Transporte', 'Ocio', 'Alquiler', 'Servicios',
+                  'Ocio', 'Alimentos'],
+    'monto': [250, 60, 120, 800, 200, 300, 150]
+})
+
+print('\nGastos por mes\n')
+gastos_por_mes = df_gastos.groupby('mes')['monto'].sum()
+print(gastos_por_mes)
+print(gastos_por_mes.idxmax())
+pivote_gasto = pd.pivot_table(df_gastos, index=['mes'], columns=['categoria'],
+                              values='monto', aggfunc='sum', fill_value=0)
+print(pivote_gasto)
