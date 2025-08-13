@@ -48,3 +48,23 @@ fp = df_inventory[(df_inventory['precio_unitario'] > 500) & (
 df_inventory['total_venta'] = df_inventory['stock'] * \
     df_inventory['precio_unitario']
 print(df_inventory)
+
+
+df_pedidos = pd.DataFrame({
+    'pedido_id': [1, 2, 3, 4, 5, 6],
+    'cliente': ['Juan', 'María', 'Pedro', 'Lucía', 'Carlos', 'Ana'],
+    'cantidad': [3, 1, 5, 2, 4, 1],
+    'precio_unitario': [15, 50, 10, 30, 12, 200],
+    'estado': ['Entregado', 'Pendiente', 'Entregado', 'Entregado', 'Pendiente',
+               'Entregado']
+})
+
+ped_fil = df_pedidos[(df_pedidos['cantidad'] > 2) &
+                     (df_pedidos['estado'] == 'Entregado')]
+print(ped_fil)
+ped_may_4 = df_pedidos[(df_pedidos['precio_unitario'] > 20)
+                       & (df_pedidos['cantidad'] > 4)]
+
+print(ped_may_4)
+df_pedidos = df_pedidos.drop('estado', axis=1)
+print(df_pedidos.head())
