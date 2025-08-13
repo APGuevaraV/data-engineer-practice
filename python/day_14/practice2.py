@@ -92,3 +92,29 @@ print(age_filtered)
 df_sueldos['ingreso_total'] = df_sueldos['sueldo']+df_sueldos['bono']
 df_sueldos = df_sueldos[df_sueldos['ingreso_total'] > 4000]
 print(df_sueldos)
+
+
+df_gastos = pd.DataFrame({
+    'categoria': ['Alimentos', 'Transporte', 'Ocio', 'Alquiler', 'Servicios',
+                  'Ocio', 'Alimentos'],
+    'monto': [250, 60, 120, 800, 200, 300, 150],
+    'fecha': pd.to_datetime([
+        '2025-08-01', '2025-08-02', '2025-08-05',
+        '2025-08-03', '2025-08-06', '2025-08-08', '2025-08-10'
+    ]),
+    'pago_tarjeta': [True, False, True, True, False, True, False]
+})
+
+ocio_food = df_gastos[
+    (df_gastos['categoria'].isin(['Ocio', 'Alimentos']))
+    & (df_gastos['pago_tarjeta'])
+]
+
+agust = df_gastos[
+    (df_gastos['fecha'] > '2025-08-05') &
+    (df_gastos['monto'] > 100)
+]
+
+df_gastos['monto_usd'] = df_gastos['monto']/3.7
+df_gastos = df_gastos[df_gastos['monto_usd'] > 60]
+print(df_gastos)
