@@ -35,3 +35,26 @@ maximo = por_cliente.idxmax()
 print(por_cliente)
 print('\n Maximo: \n')
 print(maximo)
+
+
+df_text = pd.DataFrame({
+    'id': [1, 2, 3, 4, 5, 6],
+    'producto': ['Laptop Pro', 'Laptop Air', 'Mouse Inalámbrico',
+                 'Teclado Mecánico', 'Monitor 24"', 'USB 32GB'],
+    'precio': [4500, 3500, 120, 500, 900, 50]
+})
+
+filtered_text = df_text[df_text['producto'].str.contains('Laptop')]
+print(filtered_text)
+filterd_df = df_text[~df_text['producto'].str.contains(
+    'USB|Mouse', case=False, na=False)]
+print(filterd_df)
+
+
+df_text['precio_categoria'] = df_text['precio'].apply(
+    lambda x:
+    'Alto' if x > 2000 else
+    'Medio'if 500 <= x <= 2000
+    else 'Bajo'
+)
+print(df_text)
