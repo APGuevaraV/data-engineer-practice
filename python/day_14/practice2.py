@@ -17,3 +17,27 @@ df['total_ud'] = df['precio_usd']*df['cantidad']
 
 df = df[df['total_ud'] > 60]
 print(df.reset_index())
+
+
+df_date = pd.DataFrame({
+    'id': [101, 102, 103, 104, 105, 106],
+    'producto': ['Laptop', 'Mouse', 'Teclado', 'Monitor', 'Impresora', 'USB'],
+    'stock': [5, 120, 30, 8, 10, 200],
+    'precio_unitario': [3500, 50, 120, 900, 600, 25],
+    'fecha_ingreso': pd.to_datetime([
+        '2025-08-01', '2025-07-20', '2025-06-15', '2025-08-10', '2025-05-30',
+        '2025-08-13'
+    ])
+})
+
+stock_date = df_date[(df_date['stock'] < 20) & (
+    df_date['fecha_ingreso'] > '2025-07-01')]
+print(stock_date)
+
+precios = df_date[(df_date['precio_unitario'] > 100) &
+                  (df_date['precio_unitario'] < 1000)]
+print(precios)
+
+df_date['valor_total'] = df_date['precio_unitario'] * df_date['stock']
+df_date = df_date[(df_date['valor_total'] > 5000) | (df_date['stock'] > 10)]
+print(df_date)
