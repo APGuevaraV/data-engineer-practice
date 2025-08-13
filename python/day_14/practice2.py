@@ -73,4 +73,22 @@ df_sueldos = pd.DataFrame({
     'edad': [28, 32, 26, 45, 30, 29, 38],
     'bono': [500, 200, 600, 100, 400, 250, 800]
 })
-print(df)
+
+
+print('\n SUELDOS : \n')
+df_sueldos_f = df_sueldos[
+    (df_sueldos['departamento'].isin(['IT', 'Ventas'])) &
+    (df_sueldos['sueldo'] > 3800)
+]
+
+print(df_sueldos_f)
+age_filtered = df_sueldos[
+    (df_sueldos['edad'] > 30) &
+    (df_sueldos['edad'] < 40) &
+    (df_sueldos['bono'] > 300)
+]
+print(age_filtered)
+
+df_sueldos['ingreso_total'] = df_sueldos['sueldo']+df_sueldos['bono']
+df_sueldos = df_sueldos[df_sueldos['ingreso_total'] > 4000]
+print(df_sueldos)
