@@ -17,3 +17,18 @@ print(filtered_by_price)
 df['total_venta'] = df['cantidad'] * df['precio']
 total_menor_20 = df[df['total_venta'] > 20]
 print(total_menor_20)
+
+
+df_employees = pd.DataFrame({
+    'nombre': ['Luis', 'Ana', 'Pedro', 'Lucía', 'Carlos', 'Elena'],
+    'departamento': ['IT', 'Marketing', 'IT', 'RRHH', 'IT', 'Marketing'],
+    'sueldo': [3500, 2700, 4000, 2500, 3900, 2800],
+    'edad': [28, 32, 26, 45, 30, 29]
+})
+
+print('\n Empleado:\n')
+salary_upper_3700 = df_employees[df_employees['sueldo'] > 3700]
+filtered_employees = salary_upper_3700[(salary_upper_3700['edad'] < 30) & (
+    salary_upper_3700['departamento'] != 'RRHH')]
+filtered_employees.drop('edad', axis=1)
+print(filtered_employees.reset_index())
