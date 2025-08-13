@@ -65,3 +65,16 @@ select
 )
 select categoria, sueldo from cte_categoria
 order by categoria,sueldo desc;
+
+select categoria, sueldo from cte_categoria
+order by categoria,sueldo desc;
+
+select nombre,fecha_ingreso,
+round(timestampdiff(YEAR, fecha_ingreso,curdate()),1) as anios_en_empresa
+from empleados;
+
+select ciudad,
+nombre,
+ventas,
+RANK() OVER (PARTITION BY ciudad ORDER BY ventas DESC) as ranking
+from empleados
