@@ -32,3 +32,19 @@ filtered_employees = salary_upper_3700[(salary_upper_3700['edad'] < 30) & (
     salary_upper_3700['departamento'] != 'RRHH')]
 filtered_employees.drop('edad', axis=1)
 print(filtered_employees.reset_index())
+
+
+df_inventory = pd.DataFrame({
+    'id_producto': [101, 102, 103, 104, 105, 106],
+    'nombre': ['Laptop', 'Mouse', 'Teclado', 'Monitor', 'Impresora', 'USB'],
+    'stock': [15, 50, 40, 8, 12, 100],
+    'precio_unitario': [3500, 50, 120, 900, 600, 25]
+})
+
+filtered_inv = df_inventory[df_inventory['stock'] > 20]
+fp = df_inventory[(df_inventory['precio_unitario'] > 500) & (
+    df_inventory['stock'] > 10)]
+
+df_inventory['total_venta'] = df_inventory['stock'] * \
+    df_inventory['precio_unitario']
+print(df_inventory)
