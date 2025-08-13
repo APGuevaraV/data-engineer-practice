@@ -63,3 +63,14 @@ df_pedidos['monto_total'] = df_pedidos['precio_unitario'] * \
     df_pedidos['cantidad']
 df_pedidos = df_pedidos[df_pedidos['estado'] != 'Cancelado']
 print(df_pedidos)
+
+
+df_sueldos = pd.DataFrame({
+    'nombre': ['Luis', 'Ana', 'Pedro', 'Lucía', 'Carlos', 'Elena', 'Marco'],
+    'departamento': ['IT', 'Marketing', 'IT', 'RRHH', 'IT', 'Marketing',
+                     'Ventas'],
+    'sueldo': [3500, 2700, 4000, 2500, 3900, 2800, 4500],
+    'edad': [28, 32, 26, 45, 30, 29, 38],
+    'bono': [500, 200, 600, 100, 400, 250, 800]
+})
+print(df)
