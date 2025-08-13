@@ -41,3 +41,25 @@ print(precios)
 df_date['valor_total'] = df_date['precio_unitario'] * df_date['stock']
 df_date = df_date[(df_date['valor_total'] > 5000) | (df_date['stock'] > 10)]
 print(df_date)
+
+
+df_pedidos = pd.DataFrame({
+    'pedido_id': [1, 2, 3, 4, 5, 6, 7],
+    'cliente': ['Juan', 'María', 'Pedro', 'Lucía', 'Carlos', 'Ana', 'Diego'],
+    'cantidad': [3, 1, 5, 2, 4, 1, 7],
+    'precio_unitario': [15, 50, 10, 30, 12, 200, 8],
+    'estado': ['Entregado', 'Pendiente', 'Entregado', 'Cancelado', 'Pendiente',
+               'Entregado', 'Entregado']
+})
+
+df_pedidos_f = df_pedidos[(df_pedidos['estado'] == 'Entregado')
+                          & (df_pedidos['cantidad'] > 2)]
+print('\n Pedidos \n')
+print(df_pedidos_f)
+pedidos_filtrados = df_pedidos[(df_pedidos['estado'].isin(
+    ['Pendiente', 'Cancelado'])) & (df_pedidos['precio_unitario'] > 20)]
+print(pedidos_filtrados)
+df_pedidos['monto_total'] = df_pedidos['precio_unitario'] * \
+    df_pedidos['cantidad']
+df_pedidos = df_pedidos[df_pedidos['estado'] != 'Cancelado']
+print(df_pedidos)
