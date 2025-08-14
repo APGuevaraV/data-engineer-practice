@@ -80,3 +80,14 @@ where e.id_empleado in(
 		select p.id_proyecto from proyectos p
 		where p.presupuesto > 5000) 
 						);
+
+--Obtener empleados cuyo sueldo sea mayor que cualquier presupuesto
+-- de proyectos con nombre que contenga la palabra App.
+
+select e.nombre, e.sueldo
+from empleados e
+where e.sueldo > any(
+	select p.presupuesto 
+    from proyectos p
+	where p.nombre_proyecto like '%App%'
+);
