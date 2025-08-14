@@ -17,3 +17,13 @@ from clientes c
 join pedidos p
 on c.id_cliente = p.id_cliente
 where monto > any(select precio from productos where categoria = 'Accesorios');
+
+
+--Encontrar los clientes cuyo monto de todos sus pedidos sea
+-- mayor que el precio más alto de la categoría Muebles.
+select distinct c.nombre 
+from clientes c
+join pedidos p
+on c.id_cliente = p.id_cliente
+where monto > all(select max(precio) from productos where categoria = 'Muebles');
+
