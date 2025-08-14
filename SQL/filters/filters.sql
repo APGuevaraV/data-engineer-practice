@@ -113,3 +113,17 @@ where exists(
 	where a.id_empleado = e.id_empleado
 	and a.horas > 80
 );
+
+--empleados que trabajen en proyectos donde todas las horas asignadas
+-- sean mayores al promedio de horas de todos los proyectos."
+
+select e.nombre
+from empleados e 
+where exists (
+	select 1 from asignaciones a
+    where a.id_empleado = e.id_empleado
+    and horas > (
+		select avg(horas)
+        from asignaciones
+    )
+)
