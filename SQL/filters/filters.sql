@@ -67,3 +67,16 @@ WHERE EXISTS (
             AND p2.monto > 1000
       )
 );
+
+
+--Listar los nombres de empleados que estén asignados a proyectos
+-- cuyo presupuesto sea mayor a 5000.
+select e.nombre
+from empleados e 
+where e.id_empleado in(
+	select a.id_empleado 
+	from asignaciones a
+	where a.id_proyecto in (
+		select p.id_proyecto from proyectos p
+		where p.presupuesto > 5000) 
+						);
