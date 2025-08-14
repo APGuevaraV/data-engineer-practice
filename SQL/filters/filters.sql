@@ -12,18 +12,58 @@ and year(p.fecha)=2025
 
 --Obtener los clientes cuyo monto más alto de pedido sea mayor
 -- que cualquier precio de productos de la categoría Accesorios.
-select distinct c.nombre 
+select c.nombre 
 from clientes c
-join pedidos p
-on c.id_cliente = p.id_cliente
-where monto > any(select precio from productos where categoria = 'Accesorios');
+where (
+    select max(monto)
+    from pedidos pedido
+    where p.id_cliente = c.id_cliente) 
+    > any(
+    select precio 
+    from productos 
+    where categoria = 'Accesorios'
+    );
 
 
 --Encontrar los clientes cuyo monto de todos sus pedidos sea
 -- mayor que el precio más alto de la categoría Muebles.
 select distinct c.nombre 
 from clientes c
-join pedidos p
-on c.id_cliente = p.id_cliente
-where monto > all(select max(precio) from productos where categoria = 'Muebles');
+where(
+    SELECT MIN(monto)
+    FROM pedidos p
+    WHERE p.id_cliente = c.id_cliente
+) > 
+    all(
+    select (precio) 
+    from productos
+     where categoria = 'Muebles');
 
+--Mostrar los clientes que tengan al menos un pedido con monto
+-- mayor al promedio de todos los pedidos.
+select c.nombre from clientes c 
+where exists(
+			select 1 from pedidos p
+			where p.id_cliente = c.id_cliente
+            and p.monto > (
+                select avg(p.monto)
+                from pedidos
+                )
+            )
+
+
+
+SELECT DISTINCT c.nombre
+FROM clientes c
+WHERE EXISTS (
+    SELECT 1
+    FROM pedidos p
+    WHERE p.id_cliente = c.id_cliente
+      AND p.monto > ALL (
+          SELECT p2.monto
+          FROM pedidos p2
+          JOIN clientes c2 ON p2.id_cliente = c2.id_cliente
+          WHERE c2.ciudad = c.ciudad
+            AND p2.monto > 1000
+      )
+);
