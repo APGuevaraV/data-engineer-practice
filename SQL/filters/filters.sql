@@ -91,3 +91,15 @@ where e.sueldo > any(
     from proyectos p
 	where p.nombre_proyecto like '%App%'
 );
+
+--Listar empleados cuyo sueldo sea mayor que todos los presupuestos 
+--de proyectos asignados a Marketing.
+select e.nombre, e.sueldo
+from empleados e
+where e.sueldo > all(
+	select p.presupuesto 
+    from proyectos p
+	join asignaciones a on p.id_proyecto = a.id_empleado
+    join empleados em on em.id_empleado = a.id_empleado
+    where em.departamento = 'Marketing'
+);
