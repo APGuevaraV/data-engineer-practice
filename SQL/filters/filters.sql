@@ -103,3 +103,13 @@ where e.sueldo > all(
     join empleados em on em.id_empleado = a.id_empleado
     where em.departamento = 'Marketing'
 );
+
+--Mostrar los empleados que estén asignados a al menos un proyecto
+-- con más de 80 horas trabajadas.
+select e.nombre
+from empleados e
+where exists(
+	select 1 from asignaciones a
+	where a.id_empleado = e.id_empleado
+	and a.horas > 80
+);
