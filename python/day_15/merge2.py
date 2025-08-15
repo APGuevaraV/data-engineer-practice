@@ -94,3 +94,43 @@ reporte_completo = df_precios.merge(
     df_productos, on='id_producto', how='inner'
 )
 print(reporte_completo)
+
+
+# ==========================
+# EJERCICIO 4:
+# Reporte consolidado de sucursales
+# ==========================
+df_sucursal_norte = pd.DataFrame({
+    "id_producto": [1, 2, 3],
+    "ventas": [100, 200, 150]
+})
+
+df_sucursal_sur = pd.DataFrame({
+    "id_producto": [2, 3, 4],
+    "ventas": [300, 120, 400]
+})
+
+df_sucursal_centro = pd.DataFrame({
+    "id_producto": [1, 3, 4],
+    "ventas": [80, 90, 100]
+})
+
+df_productos = pd.DataFrame({
+    "id_producto": [1, 2, 3, 4],
+    "producto": ["X", "Y", "Z", "W"]
+})
+
+
+ventas = pd.concat(
+    [
+        df_sucursal_norte,
+        df_sucursal_sur,
+        df_sucursal_centro
+    ],
+    axis=0,
+    ignore_index=True
+).groupby('id_producto')['ventas'].sum()
+
+
+reporte = df_productos.merge(ventas, how='inner', on='id_producto')
+print(reporte)
