@@ -64,3 +64,33 @@ reporte = pd.merge(
 reporte['stock_suficiente'] = (
     reporte['cantidad_pedida'] <= reporte['stock']).astype(bool)
 print(reporte)
+
+
+# ==========================
+# EJERCICIO 3:
+# Historial de precios
+# ==========================
+df_precios_2023 = pd.DataFrame({
+    "id_producto": [1, 2, 3],
+    "precio_2023": [100, 200, 300]
+})
+
+df_precios_2024 = pd.DataFrame({
+    "id_producto": [1, 2, 4],
+    "precio_2024": [110, 210, 400]
+})
+
+df_productos = pd.DataFrame({
+    "id_producto": [1, 2, 3, 4],
+    "producto": ["A", "B", "C", "D"]
+})
+# Primero concatena df_precios_2023 y df_precios_2024 verticalmente para un
+# historial unificado.
+# Luego haz un merge con df_productos para agregar el nombre del producto.
+
+df_precios = pd.concat([df_precios_2023, df_precios_2024],
+                       axis=0, ignore_index=True)
+reporte_completo = df_precios.merge(
+    df_productos, on='id_producto', how='inner'
+)
+print(reporte_completo)
