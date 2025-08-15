@@ -78,3 +78,29 @@ clientes_paises = df_clientes_4.merge(df_paises,
                                       how='inner',
                                       on='pais')
 print(clientes_paises)
+
+
+# ==========================
+# EJERCICIO 5
+# ==========================
+df_parte1 = pd.DataFrame({
+    "id": [1, 2],
+    "dato": ["A", "B"]
+})
+
+df_parte2 = pd.DataFrame({
+    "id": [3, 4],
+    "dato": ["C", "D"]
+})
+
+df_parte3 = pd.DataFrame({
+    "id": [5, 6],
+    "dato": ["E", "F"]
+})
+
+result = pd.concat([df_parte1, df_parte2, df_parte3],
+                   axis=0, ignore_index=True)
+result_horiz = pd.concat([df_parte1, df_parte2, df_parte3],
+                         axis=1)
+print(result)
+print(result_horiz)
