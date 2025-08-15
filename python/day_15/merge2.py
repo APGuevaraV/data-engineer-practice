@@ -134,3 +134,37 @@ ventas = pd.concat(
 
 reporte = df_productos.merge(ventas, how='inner', on='id_producto')
 print(reporte)
+
+# ==========================
+# EJERCICIO 5:
+# Unir registros de empleados con cambios de área
+# ==========================
+df_empleados_2023 = pd.DataFrame({
+    "id_empleado": [1, 2, 3],
+    "nombre": ["Ana", "Luis", "Carla"],
+    "area": ["Ventas", "IT", "Marketing"]
+})
+
+df_empleados_2024 = pd.DataFrame({
+    "id_empleado": [1, 2, 4],
+    "nombre": ["Ana", "Luis", "Jorge"],
+    "area": ["Ventas", "Soporte", "IT"]
+})
+# Une ambos DataFrames para ver todos los empleados y sus áreas en 2023 y 2024.
+# Si el área cambió, agrega una columna booleana "cambio_area" que indique
+# True o False.
+df_empleados_2023['anio'] = 2023
+df_empleados_2024['anio'] = 2024
+df_employees = pd.concat(
+    [df_empleados_2023,
+     df_empleados_2024],
+    axis=0,
+    ignore_index=True
+)
+
+df_comparacion = pd.merge(df_empleados_2023, df_empleados_2024,
+                          on='id_empleado',
+                          how='outer',
+                          suffixes=('_2023', '_2024'))
+df_comparacion['cambio_area'] = df_comparacion['area_2023'] != df_comparacion['area_2024']
+print(df_comparacion)
