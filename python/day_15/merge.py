@@ -51,3 +51,48 @@ ventas = pd.merge(ventas, df_empleados,
                   on='id_empleado',
                   how='outer')[['id_empleado', 'nombre']]
 print(ventas)
+
+
+# ==========================
+# EJERCICIO 3:
+# Concatenar reportes trimestrales
+# ==========================
+df_trimestre1 = pd.DataFrame({
+    "mes": ["Enero", "Febrero", "Marzo"],
+    "ventas": [1000, 1200, 900]
+})
+
+df_trimestre2 = pd.DataFrame({
+    "mes": ["Abril", "Mayo", "Junio"],
+    "ventas": [1100, 1300, 1250]
+})
+
+df_trimestre3 = pd.DataFrame({
+    "mes": ["Julio", "Agosto", "Septiembre"],
+    "ventas": [1400, 1350, 1500]
+})
+# Concatena los tres DataFrames en uno solo y ordena
+# por mes respetando el orden cronológico
+
+
+def obtener_numero_mes(mes):
+    meses = {
+        'enero': 1, 'febrero': 2, 'marzo': 3, 'abril': 4,
+        'mayo': 5, 'junio': 6, 'julio': 7, 'agosto': 8,
+        'septiembre': 9, 'octubre': 10, 'noviembre': 11, 'diciembre': 12
+    }
+    return meses.get(mes)
+
+
+reporte = pd.concat([
+    df_trimestre1,
+    df_trimestre2,
+    df_trimestre3],
+    axis=0,
+    ignore_index=True
+)
+
+reporte['mes_num'] = reporte['mes'].apply(
+    lambda x: obtener_numero_mes(x.lower()))
+
+print(reporte[['mes', 'ventas']])
