@@ -49,7 +49,7 @@ ventas = pd.merge(df_ventas_2023, df_ventas_2024,
 
 ventas = pd.merge(ventas, df_empleados,
                   on='id_empleado',
-                  how='outer')[['id_empleado', 'nombre']]
+                  how='outer')
 print(ventas)
 
 
@@ -94,6 +94,7 @@ reporte = pd.concat([
 
 reporte['mes_num'] = reporte['mes'].apply(
     lambda x: obtener_numero_mes(x.lower()))
+reporte = reporte.sort_values(by='mes_num').reset_index(drop=True)
 
 print(reporte[['mes', 'ventas']])
 
@@ -117,8 +118,31 @@ df_profesores = pd.DataFrame({
 schedule = pd.merge(
     df_cursos,
     df_profesores,
-    how='outer',
+    how='left',
     on='id_curso',
 )
 
 print(schedule)
+
+
+# ==========================
+# EJERCICIO 5:
+# Datos de clientes de dos sistemas diferentes
+# ==========================
+df_clientes_sistemaA = pd.DataFrame({
+    "id_cliente": [1, 2, 3],
+    "nombre": ["Ana", "Luis", "Carla"],
+    "ciudad": ["Lima", "Cusco", "Arequipa"]
+})
+
+df_clientes_sistemaB = pd.DataFrame({
+    "id_cliente": [4, 5],
+    "nombre": ["Jorge", "Lucía"],
+    "ciudad": ["Piura", "Tacna"]
+})
+# Concatena ambos DataFrames en uno solo y resetea el índice
+df_clientes_sistemaA['sistema'] = 'A'
+df_clientes_sistemaB['sistema'] = 'B'
+sistema = pd.concat(
+    [df_clientes_sistemaA, df_clientes_sistemaB], axis=0, ignore_index=True)
+print(sistema)
