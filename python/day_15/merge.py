@@ -96,3 +96,29 @@ reporte['mes_num'] = reporte['mes'].apply(
     lambda x: obtener_numero_mes(x.lower()))
 
 print(reporte[['mes', 'ventas']])
+
+
+# ==========================
+# EJERCICIO 4:
+# Información de cursos y profesores
+# ==========================
+df_cursos = pd.DataFrame({
+    "id_curso": [1, 2, 3],
+    "curso": ["Python", "SQL", "Excel"]
+})
+
+df_profesores = pd.DataFrame({
+    "id_curso": [1, 2, 4],
+    "profesor": ["María", "Pedro", "Sofía"]
+})
+# Une para mostrar todos los cursos y, si no hay profesor asignado,
+# que aparezca NaN
+
+schedule = pd.merge(
+    df_cursos,
+    df_profesores,
+    how='outer',
+    on='id_curso',
+)
+
+print(schedule)
