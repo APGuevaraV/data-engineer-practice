@@ -59,3 +59,22 @@ df_sucursal_b = pd.DataFrame({
 
 a_b = pd.concat([df_sucursal_a, df_sucursal_b], axis=0, ignore_index=True)
 print(a_b)
+
+# ==========================
+# EJERCICIO 4
+# ==========================
+df_clientes_4 = pd.DataFrame({
+    "id": [1, 2, 3, 4],
+    "nombre": ["Pedro", "María", "José", "Lucía"],
+    "pais": ["Perú", "Chile", "Perú", "Brasil"]
+})
+
+df_paises = pd.DataFrame({
+    "pais": ["Perú", "Chile", "Argentina"],
+    "continente": ["América", "América", "América"]
+})
+
+clientes_paises = df_clientes_4.merge(df_paises,
+                                      how='inner',
+                                      on='pais')
+print(clientes_paises)
