@@ -22,3 +22,32 @@ inventario_precios = df_inventario.merge(df_precios,
                                                             'stock',
                                                             'precio_unitario']]
 print(inventario_precios)
+
+
+# ==========================
+# EJERCICIO 2:
+# Ventas por empleado en dos años
+# ==========================
+df_ventas_2023 = pd.DataFrame({
+    "id_empleado": [1, 2, 3],
+    "ventas_2023": [25000, 30000, 18000]
+})
+
+df_ventas_2024 = pd.DataFrame({
+    "id_empleado": [2, 3, 4],
+    "ventas_2024": [32000, 21000, 15000]
+})
+
+df_empleados = pd.DataFrame({
+    "id_empleado": [1, 2, 3, 4],
+    "nombre": ["Ana", "Luis", "Carla", "Jorge"]
+})
+
+ventas = pd.merge(df_ventas_2023, df_ventas_2024,
+                  on='id_empleado',
+                  how='outer')
+
+ventas = pd.merge(ventas, df_empleados,
+                  on='id_empleado',
+                  how='outer')[['id_empleado', 'nombre']]
+print(ventas)
