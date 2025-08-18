@@ -73,3 +73,21 @@ pedidos_by_month = by_date['id_pedido'].count()
 print(pedidos_by_month)
 monto_total_by_month = by_date['monto'].sum()
 print(monto_total_by_month)
+
+df_tickets = pd.DataFrame({
+    "id_ticket": [301, 302, 303, 304, 305, 306, 307, 308],
+    "soporte": ["Ana", "Luis", "Carla", "Pedro", "Sofía", "Luis", "Carla",
+                "Pedro"],
+    "categoria": ["Red", "Software", "Hardware", "Software", "Red", "Red",
+                  "Hardware", "Software"],
+    "tiempo_resolucion_horas": [5, 2, 8, 4, 3, 6, 7, 2],
+    "satisfaccion_cliente": [4, 5, 3, 4, 5, 3, 2, 5]
+})
+
+by_support = df_tickets.groupby('soporte')
+time = by_support['tiempo_resolucion_horas'].mean()
+print(time)
+satisfaccion = by_support['satisfaccion_cliente'].mean()
+print(satisfaccion)
+resolve_tickets = by_support['id_ticket'].count()
+print(resolve_tickets)
