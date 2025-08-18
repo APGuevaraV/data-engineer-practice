@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 df_ventas = pd.DataFrame({
     "id_venta": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -139,3 +140,23 @@ by_equip_leader['ranking'] = by_equip_leader.groupby(level=0)['total_horas'] \
                                             .rank(method='dense',
                                                   ascending=False)
 print(by_equip_leader.sort_values(['equipo', 'ranking']))
+
+
+df_calificaciones = pd.DataFrame({
+    "estudiante": ["Ana", "Luis", "Carla", "Pedro", "Sofía", "Miguel", "Lucía",
+                   "Andrés", "Rosa", "Diego"],
+    "curso": ["Matemáticas", "Matemáticas", "Matemáticas", "Matemáticas",
+              "Historia", "Historia", "Historia", "Historia", "Ciencias",
+              "Ciencias"],
+    "nota": [15, 18, 12, 17, 20, 14, 16, 19, 13, 11],
+    "creditos": [3, 3, 3, 3, 4, 4, 4, 4, 5, 5]
+})
+
+
+by_course = df_calificaciones.groupby('curso').apply(
+    lambda g: pd.Series({
+        'promedio': g['nota'].mean(),
+        'ponderado': np.average(g['nota'], weights=g['creditos'])
+    })
+)
+print(by_course)
