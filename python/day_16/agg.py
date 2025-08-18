@@ -160,3 +160,56 @@ by_course = df_calificaciones.groupby('curso').apply(
     })
 )
 print(by_course)
+
+
+df_envios = pd.DataFrame({
+    "id_envio": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "ciudad_origen": ["Lima", "Lima", "Cusco", "Cusco", "Lima", "Arequipa",
+                      "Arequipa", "Cusco", "Lima", "Arequipa"],
+    "ciudad_destino": ["Cusco", "Arequipa", "Lima", "Lima", "Cusco", "Cusco",
+                       "Lima", "Arequipa", "Arequipa", "Lima"],
+    "peso_kg": [10, 5, 8, 12, 15, 9, 7, 6, 14, 11],
+    "costo": [200, 120, 180, 250, 300, 210, 150, 160, 280, 240]
+})
+
+promedio_envio = df_envios.groupby(
+    ['ciudad_origen', 'ciudad_destino']).agg(
+        promedio=('costo', 'mean')
+)
+
+pivot_table_envio = pd.pivot_table(
+    promedio_envio,
+    values=['promedio'],
+    columns=['ciudad_destino'],
+    index=['ciudad_origen'],
+    fill_value=0
+)
+print(pivot_table_envio)
+
+
+df_ventas_mensuales = pd.DataFrame({
+    "mes": ["Enero", "Enero", "Enero", "Febrero", "Febrero", "Febrero",
+            "Marzo", "Marzo", "Marzo"],
+    "vendedor": ["Ana", "Luis", "Carla", "Ana", "Luis", "Carla", "Ana",
+                 "Luis", "Carla"],
+    "ventas": [1200, 1500, 1000, 1800, 1600, 1100, 2000, 1700, 1200],
+    "comision": [120, 150, 100, 180, 160, 110, 200, 170, 120]
+})
+
+by_month = df_ventas_mensuales.groupby('mes').agg(
+    total_ventas=('ventas', 'sum'),
+    total_comision=('comision', 'sum')
+)
+print(by_month)
+by_employee = df_ventas_mensuales.groupby(['mes', 'vendedor']).agg(
+    total_ventas=('ventas', 'sum')
+)
+
+mejor_vendedor = by_employee.groupby(
+    level=0)['total_ventas'].idxmax().apply(lambda x: x[1])
+print(mejor_vendedor)
+
+
+by_month = by_month.merge(mejor_vendedor.rename(
+    'mejor_vendedor'), left_index=True, right_index=True)
+print(by_month)
