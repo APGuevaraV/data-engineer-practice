@@ -91,3 +91,31 @@ satisfaccion = by_support['satisfaccion_cliente'].mean()
 print(satisfaccion)
 resolve_tickets = by_support['id_ticket'].count()
 print(resolve_tickets)
+
+
+df_transacciones = pd.DataFrame({
+    "id_transaccion": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    "cliente": ["Ana", "Luis", "Ana", "Pedro", "Sofía", "Luis", "Ana", "Pedro",
+                "Lucía", "Sofía", "Luis", "Lucía"],
+    "categoria": ["Electrónica", "Ropa", "Ropa", "Hogar", "Electrónica",
+                  "Hogar", "Ropa", "Electrónica", "Hogar", "Ropa",
+                  "Electrónica", "Electrónica"],
+    "monto": [1200, 200, 150, 600, 1800, 700, 250, 2200, 950, 300, 1400, 1100],
+    "fecha": pd.to_datetime([
+        "2024-01-05", "2024-01-12", "2024-01-20", "2024-02-10", "2024-02-15",
+        "2024-02-25",
+        "2024-03-05", "2024-03-12", "2024-03-20", "2024-04-02", "2024-04-10",
+        "2024-04-15"
+    ])
+})
+
+customer_category = df_transacciones.groupby(['cliente', 'categoria']).agg(
+    monto_total=('monto', 'sum'),
+    n_transacciones=('id_transaccion', 'count')
+).reset_index()
+
+top2_por_cliente = customer_category.sort_values(['cliente', 'monto_total'],
+                                                 ascending=[True, False]) \
+    .groupby('cliente') \
+    .head(2)
+print(top2_por_cliente)
