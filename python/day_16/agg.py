@@ -52,3 +52,24 @@ anios_experience = by_department['años_experiencia'].sum()
 print(sueldo_promedio)
 print(sueldo_maximo)
 print(anios_experience)
+
+
+df_pedidos = pd.DataFrame({
+    "id_pedido": [201, 202, 203, 204, 205, 206, 207, 208, 209],
+    "cliente": ["Ana", "Luis", "Carla", "Pedro", "Sofía", "Miguel", "Lucía",
+                "Andrés", "Carla"],
+    "categoria": ["Electrónica", "Ropa", "Electrónica", "Ropa", "Electrónica",
+                  "Hogar", "Ropa", "Hogar", "Ropa"],
+    "monto": [1200, 200, 800, 350, 1500, 600, 450, 700, 400],
+    "fecha": pd.to_datetime([
+        "2024-01-10", "2024-01-15", "2024-02-20", "2024-02-25",
+        "2024-03-05", "2024-03-10", "2024-03-15", "2024-04-01", "2024-04-05"
+    ])
+})
+
+by_date = df_pedidos.groupby(df_pedidos['fecha'].dt.month)
+pedidos_by_month = by_date['id_pedido'].count()
+
+print(pedidos_by_month)
+monto_total_by_month = by_date['monto'].sum()
+print(monto_total_by_month)
