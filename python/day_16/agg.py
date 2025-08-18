@@ -119,3 +119,23 @@ top2_por_cliente = customer_category.sort_values(['cliente', 'monto_total'],
     .groupby('cliente') \
     .head(2)
 print(top2_por_cliente)
+
+
+df_proyectos = pd.DataFrame({
+    "id_proyecto": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "equipo": ["A", "A", "B", "B", "C", "C", "A", "B", "C"],
+    "lider": ["Ana", "Luis", "Ana", "Carla", "Pedro", "Sofía", "Luis", "Carla",
+              "Pedro"],
+    "horas": [100, 120, 90, 80, 150, 140, 110, 95, 160],
+    "costo": [5000, 6000, 4500, 4000, 7000, 6800, 5500, 4200, 7200]
+})
+
+by_equip_leader = df_proyectos.groupby(['equipo', 'lider']).agg(
+    total_horas=('horas', 'sum'),
+    promedio_cost=('costo', 'mean')
+)
+
+by_equip_leader['ranking'] = by_equip_leader.groupby(level=0)['total_horas'] \
+                                            .rank(method='dense',
+                                                  ascending=False)
+print(by_equip_leader.sort_values(['equipo', 'ranking']))
