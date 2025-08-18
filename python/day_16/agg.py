@@ -15,3 +15,21 @@ total_amount_by_product = group_by_product['cantidad'].sum()
 print(total_amount_by_product)
 promedio_by_product = group_by_product['precio_unitario'].mean()
 print(promedio_by_product)
+
+
+# exercise 2
+df_clientes = pd.DataFrame({
+    "id_cliente": [101, 102, 103, 104, 105, 106, 107, 108],
+    "nombre": ["Ana", "Luis", "Carla", "Pedro", "Sofía", "Miguel", "Lucía",
+               "Andrés"],
+    "ciudad": ["Lima", "Lima", "Cusco", "Arequipa", "Lima", "Cusco",
+               "Arequipa", "Cusco"],
+    "compras": [5, 8, 2, 10, 6, 4, 7, 3],
+    "gasto_total": [500, 1200, 250, 2000, 800, 450, 1500, 300]
+})
+
+by_city = df_clientes.groupby('ciudad')
+customers_by_city = by_city['id_cliente'].count()
+print(customers_by_city)
+cost_by_city = by_city['gasto_total'].mean().round(2)
+print(cost_by_city)
