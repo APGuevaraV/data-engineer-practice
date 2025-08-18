@@ -33,3 +33,22 @@ customers_by_city = by_city['id_cliente'].count()
 print(customers_by_city)
 cost_by_city = by_city['gasto_total'].mean().round(2)
 print(cost_by_city)
+
+
+df_empleados = pd.DataFrame({
+    "id_empleado": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "nombre": ["Ana", "Luis", "Carla", "Pedro", "Sofía", "Miguel", "Lucía",
+               "Andrés", "Rosa", "Diego"],
+    "departamento": ["Ventas", "Ventas", "IT", "IT", "Marketing", "Marketing",
+                     "IT", "Ventas", "Marketing", "IT"],
+    "sueldo": [3000, 3200, 5000, 4800, 4000, 4200, 5100, 3100, 3900, 5300],
+    "años_experiencia": [2, 3, 5, 6, 4, 7, 8, 2, 5, 10]
+})
+
+by_department = df_empleados.groupby('departamento')
+sueldo_promedio = by_department['sueldo'].mean().round(2)
+sueldo_maximo = by_department["sueldo"].max()
+anios_experience = by_department['años_experiencia'].sum()
+print(sueldo_promedio)
+print(sueldo_maximo)
+print(anios_experience)
