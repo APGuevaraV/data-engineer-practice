@@ -61,3 +61,24 @@ DELIMITER ;
 CALL calcular_aumentos();
 SELECT * FROM aumentos;
 SELECT * FROM logs_proceso;
+
+
+DELIMITER //
+CREATE PROCEDURE procesar_empleados()
+BEGIN
+    DECLARE v_id INT DEFAULT 1;
+    DECLARE v_total INT;
+
+    SELECT COUNT(*) INTO v_total FROM empleados;
+
+    WHILE v_id <= v_total DO
+        INSERT INTO logs_proceso (descripcion) 
+        VALUES (CONCAT('Procesado empleado con ID: ', v_id));
+
+        SET v_id = v_id + 1;
+    END WHILE;
+
+    INSERT INTO logs_proceso (descripcion) VALUES ('Carga finalizada con WHILE');
+END;
+//
+DELIMITER ;
