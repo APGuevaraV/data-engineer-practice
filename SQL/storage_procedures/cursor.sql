@@ -253,3 +253,23 @@ delimiter ;
 
 call descuentos();
 select * from ventas_descuento ;
+
+--pago de deuda  con while
+delimiter //
+create procedure saldo()
+begin
+	declare mes int default 1;
+    declare deuda decimal(10,2);
+    set deuda = 2000;
+    while deuda <>0 DO
+		set deuda = deuda-200;
+        insert into pagos(mes,saldo_restante)values
+        (mes,deuda);
+        set mes = mes+1;
+    end while;
+end
+//
+delimiter ;
+
+call saldo();
+select * from pagos;
