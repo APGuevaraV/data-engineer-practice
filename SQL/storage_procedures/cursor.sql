@@ -217,3 +217,39 @@ delimiter ;
 
 call multiply_5();
 select * from tabla_multiplicar;
+
+
+--aplicar descuento con cursos y case
+delimiter //
+create procedure descuentos()
+begin
+	declare v_id int;
+    declare v_cliente varchar(50);
+    declare v_monto decimal(10,2);
+    declare done int default False;
+    declare descuento decimal(10,2);
+    
+    declare CUR cursor for select id,cliente,monto from ventas;
+    declare continue handler for not found set done = True;
+    
+    open cur;
+    read_loop: loop
+		fetch cur into v_id,v_cliente,v_monto;
+        if done then
+			leave read_loop;
+		end if;
+		set descuento = case
+						when v_monto <100 then v_monto - v_monto*0.05
+						when v_monto >=100 and v_monto <=500 then v_monto - v_monto*0.10
+						else v_monto - v_monto*0.15
+						end;
+		insert into ventas_descuento(cliente,monto_original,monto_con_descuento)
+        values( v_cliente,v_monto,descuento );
+	end loop;
+    close cur;    
+end
+//
+delimiter ;
+
+call descuentos();
+select * from ventas_descuento ;
