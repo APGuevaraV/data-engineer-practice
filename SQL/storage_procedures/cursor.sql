@@ -136,3 +136,33 @@ delimiter ;
 drop procedure if exists procesar;
 call procesar();
 select * from logs_etl;
+
+
+--acumulador :suma_total con CURSOR
+delimiter //
+create procedure total_salarios()
+begin
+	declare done int default False;
+    declare v_id INT;
+    declare v_nombre VARCHAR(50);
+    declare v_salario DECIMAL(10,2);
+    declare suma_total decimal(10,2) default 0;
+    
+    declare CUR cursor for select id,nombre,salario from empleados6;
+    declare continue handler for not found set done = True;
+    open CUR;
+    read_loop: LOOP
+		fetch CUR into v_id,v_nombre,v_salario;
+        if done then
+			leave read_loop;
+		end if;
+        set suma_total =suma_total +v_salario;
+	end loop;
+    insert into resumen(total_salarios) values(suma_total);
+    close cur;
+end 
+//
+delimiter ;
+
+call total_salarios();
+select * from resumen;
