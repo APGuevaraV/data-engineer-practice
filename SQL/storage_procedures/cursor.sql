@@ -80,3 +80,37 @@ end
 delimiter ;
 call numeros_almacenados();
 select * from numeros;
+
+--cursor con case 
+delimiter //
+create procedure increment_salary()
+begin
+	declare done int default False;
+	declare v_id int;
+    declare v_nombre varchar(50);
+    declare v_salario decimal(10,2);
+    declare v_nuevo_salario decimal(10,2);
+    
+    declare CUR cursor for select id,nombre,salario from empleados3;
+    declare continue handler for not found set done= True;
+    open cur;
+    read_loop: LOOP
+				FETCH CUR into v_id,v_nombre,v_salario;
+                if done then
+					leave read_loop;
+				end if;
+                set v_nuevo_salario = case
+									when v_salario < 1000 then v_salario*1.20
+									when v_salario <=1000 and v_salario <=1500 then v_salario*1.10
+									else v_salario*1.05
+									end;
+				insert into aumentos(id_empleado,nuevo_salario)
+                values(v_id,v_nuevo_salario);
+	end loop;
+    close cur;
+
+end
+//
+delimiter ; 
+call increment_salary();
+select * from aumentos;
