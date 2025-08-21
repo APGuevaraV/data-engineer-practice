@@ -166,3 +166,35 @@ delimiter ;
 
 call total_salarios();
 select * from resumen;
+
+--clasificacion con cursor
+delimiter //
+create procedure clasificacion()
+begin
+	declare done int default False;
+	declare v_id INT;
+    declare v_nombre VARCHAR(50);
+    declare v_edad INT;
+    declare v_categoria varchar(20);
+    declare cur cursor for select id,nombre,edad from clientes;
+    declare continue handler for not found set done = True;
+    open cur;
+    read_loop:Loop
+		fetch cur into v_id,v_nombre,v_edad;
+        if done then
+			leave read_loop;
+		end if;
+        set v_categoria = case
+						when v_edad < 18 then 'Menor'
+						when v_edad >=18 and v_edad <=59 then 'Adulto'
+						else 'Senior'
+						end;
+		insert into clientes_categoria(nombre,categoria)values(v_nombre,v_categoria);
+        end loop;
+        close cur;
+end
+// 
+delimiter ;
+
+call clasificacion();
+select* from clientes_categoria;
