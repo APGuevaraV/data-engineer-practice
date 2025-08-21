@@ -114,3 +114,25 @@ end
 delimiter ; 
 call increment_salary();
 select * from aumentos;
+
+
+--while simulando etl
+delimiter //
+create procedure procesar()
+begin
+	declare v_id int default 1;
+    declare total int;
+    select count(*) into total from empleados4;
+    while v_id <=total DO
+		insert into logs_etl(mensaje)
+        values(concat('Procesado empleado con ID:',v_id));
+        set v_id = v_id+1;
+    end while;
+    insert into logs_etl(mensaje)
+        values(concat('ETL completado'));
+end
+//
+delimiter ;
+drop procedure if exists procesar;
+call procesar();
+select * from logs_etl;
