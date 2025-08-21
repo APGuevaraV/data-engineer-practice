@@ -198,3 +198,22 @@ delimiter ;
 
 call clasificacion();
 select* from clientes_categoria;
+
+--tabla 5 con while
+delimiter //
+create procedure multiply_5()
+begin
+	declare contador int default 1;
+    while contador <=10 DO
+		insert into tabla_multiplicar(operacion,resultado)
+        values(
+        concat(contador,'x5'),
+        contador*5);
+        set contador = contador+1;
+	end while;
+end
+//
+delimiter ;
+
+call multiply_5();
+select * from tabla_multiplicar;
