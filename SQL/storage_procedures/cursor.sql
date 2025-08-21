@@ -62,3 +62,21 @@ drop procedure if exists insertar_categorias;
 
 call insertar_categorias();
 select * from categorias;
+
+
+
+--insert con while
+
+delimiter //
+create procedure numeros_almacenados()
+begin
+	declare contador int default 1;
+    while contador <=10 DO
+		insert into numeros(valor) values(contador);
+        set contador = contador+1;
+	end while;
+end
+//
+delimiter ;
+call numeros_almacenados();
+select * from numeros;
