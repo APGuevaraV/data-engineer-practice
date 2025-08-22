@@ -273,3 +273,24 @@ delimiter ;
 
 call saldo();
 select * from pagos;
+
+--in out
+delimiter //
+create procedure bono(in i_id int,out nuevo_salario decimal(10,2))
+begin
+	declare v_salario decimal(10,2);
+    declare v_departamento varchar(50);
+    declare bono decimal(10,2);
+    
+    select salario,departamento into v_salario,v_departamento from empleado where id = i_id;
+    set bono = case
+				when v_departamento = 'Ventas' then v_salario*1.10
+				when v_departamento = 'TI' then v_salario*1.15
+				else v_salario*1.05
+				end;
+	select bono into nuevo_salario;
+end
+//
+delimiter ;
+call bono(5,@bono);
+select @bono;
