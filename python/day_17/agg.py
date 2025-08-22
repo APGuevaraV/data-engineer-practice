@@ -67,3 +67,19 @@ by_clients = df4.groupby(['cliente', 'categoria']).agg(
         x/df4.loc[x.index, 'items']).mean().round())
 ).reset_index()
 print(by_clients)
+
+# horas trabajadas
+df5 = pd.DataFrame({
+    "proyecto": ["X", "X", "X", "Y", "Y", "Y", "Z", "Z"],
+    "empleado": ["Ana", "Luis", "Carla", "Ana", "Luis", "Carla", "Ana",
+                 "Luis"],
+    "horas": [40, 35, 45, 50, 20, 25, 60, 55],
+    "costo_hora": [20, 22, 18, 20, 22, 18, 20, 22]
+})
+
+by_proyect = df5.groupby(['proyecto', 'empleado']).agg(
+    total_horas=('horas', 'sum'),
+    costo_total=('horas', lambda x: (
+        x * df5.loc[x.index, 'costo_hora']).round())
+).reset_index()
+print(by_proyect)
