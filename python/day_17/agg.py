@@ -50,3 +50,20 @@ production = df3.groupby(['fabrica', 'turno']).agg(
     media=('unidades', lambda y: y.mean() if y.mean() > 200 else 0)
 )
 print(production)
+
+
+df4 = pd.DataFrame({
+    "cliente": ["A1", "A1", "B2", "B2", "C3", "C3", "C3", "A1"],
+    "categoria": ["Electrónica", "Ropa", "Electrónica", "Ropa", "Electrónica",
+                  "Ropa", "Ropa", "Ropa"],
+    "monto": [500, 200, 700, 100, 300, 250, 400, 150],
+    "items": [1, 2, 3, 1, 2, 1, 4, 1]
+})
+
+by_clients = df4.groupby(['cliente', 'categoria']).agg(
+    gasto_total=('monto', 'sum'),
+    nro_items=('items', 'sum'),
+    ticket_promedio=('monto', lambda x: (
+        x/df4.loc[x.index, 'items']).mean().round())
+).reset_index()
+print(by_clients)
