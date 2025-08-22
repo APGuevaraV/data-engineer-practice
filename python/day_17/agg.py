@@ -83,3 +83,36 @@ by_proyect = df5.groupby(['proyecto', 'empleado']).agg(
         x * df5.loc[x.index, 'costo_hora']).sum())
 ).reset_index()
 print(by_proyect)
+
+# sueldos por dpto y genero
+
+df6 = pd.DataFrame({
+    "departamento": ["IT", "IT", "IT", "Ventas", "Ventas", "Ventas", "HR",
+                     "HR"],
+    "genero": ["M", "F", "M", "M", "F", "F", "M", "F"],
+    "sueldo": [3000, 3500, 4000, 2500, 2700, 2600, 2800, 2900],
+    "bono": [300, 400, 500, 200, 250, 220, 300, 280]
+})
+
+by_department = df6.groupby(['departamento', 'genero']).agg(
+    sueldo_promedio=('sueldo', 'mean'),
+    total_bonos=('bono', 'sum'),
+    ratio=('bono', lambda x: (x / df6.loc[x.index, 'sueldo']).mean()*100)
+).reset_index()
+print(by_department)
+
+# pedidos en tienda
+df7 = pd.DataFrame({
+    "cliente": ["C1", "C1", "C2", "C2", "C3", "C3", "C3", "C4"],
+    "pais": ["PE", "PE", "MX", "MX", "PE", "PE", "CL", "CL"],
+    "pedido_id": [101, 102, 103, 104, 105, 106, 107, 108],
+    "monto": [250, 300, 150, 200, 100, 180, 220, 500],
+    "items": [3, 4, 2, 1, 1, 2, 5, 10]
+})
+
+by_tienda = df7.groupby(['pais', 'cliente']).agg(
+    monto_total=('monto', 'sum'),
+    cantidad_promedio=('items', 'mean'),
+    mayor_a_400=('monto', lambda x: (x > 400).any())
+).reset_index()
+print(by_tienda)
