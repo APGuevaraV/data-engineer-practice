@@ -80,6 +80,6 @@ df5 = pd.DataFrame({
 by_proyect = df5.groupby(['proyecto', 'empleado']).agg(
     total_horas=('horas', 'sum'),
     costo_total=('horas', lambda x: (
-        x * df5.loc[x.index, 'costo_hora']).round())
+        x * df5.loc[x.index, 'costo_hora']).sum())
 ).reset_index()
 print(by_proyect)
