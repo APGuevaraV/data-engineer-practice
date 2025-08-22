@@ -16,3 +16,20 @@ agrupado = df1.groupby(['empleado', 'region']).agg(
     rango_ventas=('ventas', lambda x: x.max() - x.min()),
 ).reset_index()
 print(agrupado)
+
+
+# Cursos y notas
+df2 = pd.DataFrame({
+    "curso": ["Python", "Python", "SQL", "SQL", "Excel", "Excel", "Python",
+              "SQL"],
+    "profesor": ["Juan", "Ana", "Juan", "Ana", "Ana", "Juan", "Juan", "Ana"],
+    "nota": [15, 18, 11, 20, 14, 16, 19, 12],
+    "asistencia": [12, 14, 9, 15, 13, 10, 16, 8]
+})
+
+by_notes = df2.groupby(['curso', 'profesor']).agg(
+    maximo_notas=('nota', 'max'),
+    minimo_asistencia=('asistencia', 'min'),
+    promedio=('nota', lambda x: round(x.mean()))
+).reset_index()
+print(by_notes)
