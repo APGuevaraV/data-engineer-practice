@@ -33,3 +33,20 @@ by_notes = df2.groupby(['curso', 'profesor']).agg(
     promedio=('nota', lambda x: round(x.mean()))
 ).reset_index()
 print(by_notes)
+
+# producción de fábrica
+df3 = pd.DataFrame({
+    "fabrica": ["A", "A", "A", "B", "B", "C", "C", "C"],
+    "turno": ["mañana", "tarde", "noche", "mañana", "tarde", "mañana",
+              "tarde", "noche"],
+    "unidades": [200, 180, 220, 150, 170, 300, 280, 310],
+    "defectuosos": [5, 7, 6, 4, 8, 10, 9, 11]
+})
+
+production = df3.groupby(['fabrica', 'turno']).agg(
+    suma_unidades=('unidades', 'sum'),
+    porc_defectuoso=('defectuosos', lambda x: (
+        x/df3.loc[x.index, 'unidades']).mean()),
+    media=('unidades', lambda y: y.mean() if y.mean() > 200 else 0)
+)
+print(production)
