@@ -134,3 +134,21 @@ by_project = df8.groupby(['proyecto', 'fase']).agg(
 ).reset_index()
 
 print(by_project)
+
+# produccion agricola
+df9 = pd.DataFrame({
+    "cultivo": ["Maíz", "Maíz", "Maíz", "Trigo", "Trigo", "Papa", "Papa",
+                "Papa"],
+    "año": [2020, 2021, 2022, 2020, 2021, 2020, 2021, 2022],
+    "hectareas": [100, 110, 120, 90, 95, 150, 155, 160],
+    "rendimiento": [3.5, 3.6, 3.8, 2.9, 3.0, 4.2, 4.3, 4.4]
+})
+prod_agricola = df9.groupby(['cultivo']).agg(
+    promedio_hts=('hectareas', 'mean'),
+    max_rendimiento=("rendimiento", "max"),
+    tasa_crecimiento=("hectareas", lambda x:
+                      (x.sort_index(
+                      ).iloc[-1] - x.sort_index().iloc[0]) / x.sort_index().iloc[0]
+                      )
+).reset_index()
+print(prod_agricola)
