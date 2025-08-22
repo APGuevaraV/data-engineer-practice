@@ -116,3 +116,21 @@ by_tienda = df7.groupby(['pais', 'cliente']).agg(
     mayor_a_400=('monto', lambda x: (x > 400).any())
 ).reset_index()
 print(by_tienda)
+
+# evaluaciones de proyectos
+df8 = pd.DataFrame({
+    "proyecto": ["P1", "P1", "P1", "P2", "P2", "P3", "P3", "P3"],
+    "fase": ["Diseño", "Desarrollo", "Pruebas", "Diseño", "Pruebas", "Diseño",
+             "Desarrollo", "Pruebas"],
+    "calificacion": [80, 90, 85, 70, 75, 95, 88, 92],
+    "duracion_dias": [30, 60, 20, 25, 40, 15, 55, 30]
+})
+
+by_project = df8.groupby(['proyecto', 'fase']).agg(
+    promedio=('calificacion', 'mean'),
+    duracion_dias=('duracion_dias', 'sum'),
+    aprobatoria=('calificacion',
+                 lambda x: (x.mean() >= 85))
+).reset_index()
+
+print(by_project)
