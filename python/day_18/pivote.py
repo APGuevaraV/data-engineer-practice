@@ -41,7 +41,8 @@ pivote_ventas = pd.pivot_table(
     index='Producto',
     columns='Región',
     values='Ventas',
-    aggfunc='sum'
+    aggfunc='sum',
+    fill_value=0
 )
 
 print(pivote_ventas)
@@ -86,6 +87,54 @@ compras = pd.pivot_table(
     df3,
     index='Cliente',
     columns='Producto',
-    values=['monto_total'],
-    aggfunc='sum')
+    values='monto_total',
+    aggfunc='sum',
+    fill_value=0)
 print(compras)
+
+
+data = {
+    "Estudiante": ["Ana", "Luis", "Carla", "Pedro", "Ana", "Luis", "Carla",
+                   "Pedro"],
+    "Curso": ["Math", "Math", "Science", "Science", "History", "History",
+              "Math", "Science"],
+    "Nota": [15, 18, 20, 12, 16, 19, 14, 17],
+    "Semestre": ["2024-1", "2024-1", "2024-1", "2024-1", "2024-2", "2024-2",
+                 "2024-2", "2024-2"]
+}
+
+df4 = pd.DataFrame(data)
+print(df4)
+notas = pd.pivot_table(
+    df4,
+    index='Curso',
+    columns='Semestre',
+    values='Nota',
+    aggfunc='mean',
+    fill_value=0
+)
+print(notas)
+
+
+data = {
+    "Cliente": ["Ana", "Luis", "Carla", "Pedro", "Ana", "Luis", "Carla",
+                "Pedro", "Ana"],
+    "Hotel": ["Marriott", "Hilton", "Marriott", "Hilton", "Hilton",
+              "Marriott", "Hilton", "Hilton", "Marriott"],
+    "Noches": [3, 2, 4, 1, 5, 3, 2, 6, 4],
+    "CostoNoche": [120, 150, 120, 150, 150, 120, 150, 150, 120]
+}
+
+df5 = pd.DataFrame(data)
+print(df5)
+df5['Costo_total'] = df5['Noches']*df5['CostoNoche']
+hotel_reservations = pd.pivot_table(
+    df5,
+    index='Cliente',
+    columns='Hotel',
+    values='Costo_total',
+    aggfunc='sum',
+    fill_value=0
+)
+
+print(hotel_reservations)
