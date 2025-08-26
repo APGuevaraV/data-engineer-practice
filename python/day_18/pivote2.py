@@ -25,3 +25,31 @@ pivote_products = pd.pivot_table(
     fill_value=0
 )
 print(pivote_products)
+
+
+data = {
+    "Empleado": ["Ana", "Luis", "Carla", "Pedro", "Ana", "Luis", "Carla",
+                 "Pedro", "Ana", "Luis"],
+    "Departamento": ["TI", "TI", "Ventas", "Ventas", "TI", "Ventas", "TI",
+                     "Ventas", "TI", "Ventas"],
+    "Mes": ["Enero", "Enero", "Enero", "Enero", "Febrero", "Febrero",
+            "Febrero", "Febrero", "Marzo", "Marzo"],
+    "Horas": [160, 150, 170, 165, 155, 160, 145, 150, 170, 180],
+    "Proyectos": [3, 2, 4, 3, 2, 5, 3, 4, 4, 6]
+}
+
+df7 = pd.DataFrame(data)
+print(df7)
+pivote_horas = pd.pivot_table(
+    df7,
+    index='Departamento',
+    columns='Mes',
+    values=['Horas', 'Proyectos'],
+    aggfunc={
+        'Horas': 'mean',
+        'Proyectos': 'sum'
+    },
+    margins=True,
+    fill_value=0
+)
+print(pivote_horas)
