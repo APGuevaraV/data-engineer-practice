@@ -53,3 +53,29 @@ pivote_horas = pd.pivot_table(
     fill_value=0
 )
 print(pivote_horas)
+
+
+data = {
+    "Cliente": ["Juan", "Ana", "Luis", "Pedro", "Juan", "Ana", "Luis",
+                "Pedro", "Juan", "Ana"],
+    "Categoría": ["Electrónica", "Electrónica", "Ropa", "Electrónica",
+                  "Ropa", "Ropa", "Electrónica", "Ropa", "Electrónica", "Ropa"
+                  ],
+    "Producto": ["Laptop", "Mouse", "Camisa", "Laptop", "Pantalón",
+                 "Zapatos", "Tablet", "Zapatos", "Celular", "Camisa"],
+    "Cantidad": [1, 2, 3, 1, 2, 1, 2, 1, 1, 4],
+    "PrecioUnit": [2000, 50, 40, 2200, 60, 100, 500, 120, 800, 45]
+}
+
+df8 = pd.DataFrame(data)
+print(df8)
+df8['Monto'] = df8['Cantidad'] * df8['PrecioUnit']
+pivote_pedidos = pd.pivot_table(
+    df8,
+    index='Cliente',
+    columns=['Categoría', 'Producto'],
+    values='Monto',
+    aggfunc='sum',
+    fill_value=0
+)
+print(pivote_pedidos)
