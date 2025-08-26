@@ -106,3 +106,32 @@ pivote_semestre = pd.pivot_table(
 )
 
 print(pivote_semestre)
+
+
+data = {
+    "Planta": ["A", "A", "A", "B", "B", "B", "C", "C", "C"],
+    "Mes": ["Enero", "Febrero", "Marzo", "Enero", "Febrero",
+            "Marzo", "Enero", "Febrero", "Marzo"],
+    "Producto": ["X", "X", "X", "Y", "Y", "Y", "Z", "Z", "Z"],
+    "Producción": [100, 120, 130, 200, 220, 210, 150, 140, 160],
+    "Defectuosos": [5, 6, 4, 10, 8, 9, 7, 6, 5]
+}
+
+df10 = pd.DataFrame(data)
+print(df10)
+
+df10['porc_defectuosos'] = (df10['Defectuosos']/df10['Producción'])*100
+
+pivote_produccion = pd.pivot_table(
+    df10,
+    index='Planta',
+    columns='Mes',
+    values=['Producción', 'Defectuosos', 'porc_defectuosos'],
+    aggfunc={
+        'Producción': 'sum',
+        'Defectuosos': 'sum',
+        'porc_defectuosos': 'sum'
+    }
+)
+
+print(pivote_produccion)
