@@ -79,3 +79,30 @@ pivote_pedidos = pd.pivot_table(
     fill_value=0
 )
 print(pivote_pedidos)
+
+
+data = {
+    "Estudiante": ["Ana", "Luis", "Carla", "Pedro", "Ana", "Luis", "Carla",
+                   "Pedro", "Ana", "Luis"],
+    "Curso": ["Math", "Math", "Science", "Science", "History", "History",
+              "Math", "Science", "Math", "History"],
+    "Semestre": ["2024-1", "2024-1", "2024-1", "2024-1", "2024-2", "2024-2",
+                 "2024-2", "2024-2", "2024-3", "2024-3"],
+    "Nota": [15, 18, 20, 12, 16, 19, 14, 17, 13, 20]
+}
+
+df9 = pd.DataFrame(data)
+print(df9)
+
+pivote_semestre = pd.pivot_table(
+    df9,
+    index='Curso',
+    columns='Semestre',
+    values='Nota',
+    aggfunc={
+        'Nota': ['mean', 'max', 'min']
+    },
+    fill_value=0
+)
+
+print(pivote_semestre)
