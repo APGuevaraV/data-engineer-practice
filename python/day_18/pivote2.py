@@ -184,7 +184,7 @@ ventas_totales = pd.pivot_table(
     fill_value=0
 )
 
-
+print(ventas_totales)
 ventas_promedio = pd.pivot_table(
     df12,
     index='region',
@@ -193,7 +193,7 @@ ventas_promedio = pd.pivot_table(
     aggfunc='mean',
     fill_value=0
 )
-
+print(ventas_promedio)
 
 data = {
     "agente": ["Juan", "Juan", "María", "María", "Luis", "Luis", "Ana", "Ana"],
