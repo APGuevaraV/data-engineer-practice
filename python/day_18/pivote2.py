@@ -99,9 +99,7 @@ pivote_semestre = pd.pivot_table(
     index='Curso',
     columns='Semestre',
     values='Nota',
-    aggfunc={
-        'Nota': ['mean', 'max', 'min']
-    },
+    aggfunc=['mean', 'max', 'min'],
     fill_value=0
 )
 
@@ -126,12 +124,9 @@ pivote_produccion = pd.pivot_table(
     df10,
     index='Planta',
     columns='Mes',
-    values=['Producción', 'Defectuosos', 'porc_defectuosos'],
-    aggfunc={
-        'Producción': 'sum',
-        'Defectuosos': 'sum',
-        'porc_defectuosos': 'sum'
-    }
+    values=['Producción', 'Defectuosos'],
+    aggfunc='sum'
 )
+
 
 print(pivote_produccion)
