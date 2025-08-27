@@ -130,3 +130,69 @@ pivote_produccion = pd.pivot_table(
 
 
 print(pivote_produccion)
+
+
+data = {
+    "estudiante": ["Ana", "Ana", "Luis", "Luis", "Carla", "Carla", "Ana",
+                   "Luis"],
+    "curso": ["Matemáticas", "Historia", "Matemáticas", "Historia",
+              "Matemáticas", "Historia", "Ciencias", "Ciencias"],
+    "nota": [15, 18, 12, 16, 20, 19, 17, 14],
+    "semestre": ["2024-I", "2024-I", "2024-I", "2024-I", "2024-II", "2024-II",
+                 "2024-II", "2024-II"]
+}
+df = pd.DataFrame(data)
+print(df)
+
+pivote_calificaciones = pd.pivot_table(
+    df,
+    index='estudiante',
+    columns='semestre',
+    values='nota',
+    aggfunc=['mean', 'max', 'min'],
+    fill_value=0
+)
+
+print(pivote_calificaciones)
+
+data12 = {
+    "region": ["Norte", "Norte", "Norte", "Sur", "Sur", "Sur", "Este", "Este"],
+    "producto": ["A", "B", "C", "A", "B", "C", "A", "B"],
+    "ventas": [1200, 800, 600, 1500, 900, 700, 1100, 950],
+    "mes": ["Enero", "Enero", "Enero", "Febrero", "Febrero", "Febrero",
+            "Marzo", "Marzo"]
+}
+df12 = pd.DataFrame(data12)
+print(df12)
+
+pivote_ventas = pd.pivot_table(
+    df12,
+    index='region',
+    columns=['mes', 'producto'],
+    values='ventas',
+    aggfunc=['sum', 'mean'],
+    fill_value=0
+)
+print(pivote_ventas)
+
+
+data = {
+    "agente": ["Juan", "Juan", "María", "María", "Luis", "Luis", "Ana", "Ana"],
+    "día": ["Lunes", "Martes", "Lunes", "Martes", "Lunes", "Martes", "Lunes",
+            "Martes"],
+    "llamadas": [30, 28, 25, 27, 35, 33, 20, 22],
+    "tiempo_promedio": [4.5, 4.2, 5.0, 4.8, 3.8, 4.0, 6.0, 5.8]
+}
+df13 = pd.DataFrame(data)
+print(df13)
+pivote_tiempo = pd.pivot_table(
+    df13,
+    index='agente',
+    values=['llamadas', 'tiempo_promedio'],
+    aggfunc={
+        'llamadas': 'sum',
+        'tiempo_promedio': 'mean'
+    },
+    fill_value=0
+)
+print(pivote_tiempo)
