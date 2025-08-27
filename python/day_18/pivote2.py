@@ -215,3 +215,11 @@ pivote_tiempo = pd.pivot_table(
     fill_value=0
 )
 print(pivote_tiempo)
+
+pivote_dia = pd.pivot_table(
+    df13,
+    index='día',
+    values='tiempo_promedio',
+    aggfunc='mean'
+)
+print(pivote_dia)
