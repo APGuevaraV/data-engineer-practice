@@ -152,6 +152,15 @@ pivote_calificaciones = pd.pivot_table(
     aggfunc=['mean', 'max', 'min'],
     fill_value=0
 )
+pivote_curso = pd.pivot_table(
+    df,
+    index='curso',
+    columns='semestre',
+    values='nota',
+    aggfunc=['max', 'min'],
+    fill_value=0
+)
+print(pivote_curso)
 
 print(pivote_calificaciones)
 
@@ -165,15 +174,25 @@ data12 = {
 df12 = pd.DataFrame(data12)
 print(df12)
 
-pivote_ventas = pd.pivot_table(
+
+ventas_totales = pd.pivot_table(
     df12,
     index='region',
-    columns=['mes', 'producto'],
+    columns='mes',
     values='ventas',
-    aggfunc=['sum', 'mean'],
+    aggfunc='sum',
     fill_value=0
 )
-print(pivote_ventas)
+
+
+ventas_promedio = pd.pivot_table(
+    df12,
+    index='region',
+    columns='producto',
+    values='ventas',
+    aggfunc='mean',
+    fill_value=0
+)
 
 
 data = {
