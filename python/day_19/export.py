@@ -21,3 +21,24 @@ print(df_cvs)
 df_json = pd.read_json('json/empleados.json', orient='records', lines=True)
 df_high_salary = df_json[df_json['salario'] > 4000]
 print(df_high_salary.reset_index())
+
+nuevo = {'nombre': 'Sofía',
+         'edad': 27,
+         'area': 'RRHH',
+         'salario': 4000}
+df = df._append(nuevo, ignore_index=True)
+print(df)
+
+df.to_csv('empleados.csv', index=False)
+df.to_json('json/empleados.json', orient='records',
+           lines=True)
+
+nombre_salario = pd.read_csv('empleados.csv', usecols=['nombre', 'salario'])
+print(nombre_salario)
+
+nombre_salario.sort_values(
+    by='salario', ascending=False, inplace=True)
+
+print(nombre_salario)
+
+nombre_salario.to_csv('empleados_ordenados.csv', encoding='utf8')
