@@ -11,3 +11,6 @@ df = pd.DataFrame(data)
 
 df.to_csv("empleados.csv", index=False)
 print("Archivo empleados.csv creado")
+# Exportar a JSON
+df.to_json("json/empleados.json", orient="records", lines=True)
+print("Archivo empleados.json creado")
