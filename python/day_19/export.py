@@ -17,3 +17,7 @@ print("Archivo empleados.json creado")
 
 df_cvs = pd.read_csv('empleados.csv', encoding='utf8')
 print(df_cvs)
+
+df_json = pd.read_json('json/empleados.json', orient='records', lines=True)
+df_high_salary = df_json[df_json['salario'] > 4000]
+print(df_high_salary.reset_index())
