@@ -41,4 +41,4 @@ nombre_salario.sort_values(
 
 print(nombre_salario)
 
-nombre_salario.to_csv('empleados_ordenados.csv', encoding='utf8')
+nombre_salario.to_csv('empleados_ordenados.csv', encoding='utf8', index=False)
