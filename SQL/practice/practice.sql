@@ -50,3 +50,14 @@ on i.estudiante_id = e.id
 join cursos c
 on c.id = i.curso_id
 group by categoria;
+
+
+select e.nombre,count(c.nombre) as nro from 
+inscripciones i
+join estudiantes e 
+on i.estudiante_id = e.id
+join cursos c
+on c.id = i.curso_id
+where c.categoria = 'Tecnología'
+group by e.nombre
+having nro >1;
