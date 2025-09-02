@@ -39,3 +39,14 @@ on c.id = i.curso_id
 SELECT estudiante, curso, nota
 FROM cte_MaxNota
 WHERE rn = 1;
+
+
+-- Muestra el número de estudiantes inscritos por categoría de curso.
+
+select c.categoria, count(e.nombre) cantidad_alumnos from
+estudiantes e 
+join inscripciones i 
+on i.estudiante_id = e.id
+join cursos c
+on c.id = i.curso_id
+group by categoria;
