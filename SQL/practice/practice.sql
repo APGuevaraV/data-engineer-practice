@@ -17,3 +17,25 @@ on e.id = i.estudiante_id
 join cursos c 
 on i.curso_id = c.id
 where e.ciudad = 'Lima';
+
+
+-- Lista el curso con la nota más alta de cada estudiante 
+-- (usa JOIN y subconsulta o función de ventana).
+
+with cte_NotaPorEstudiante as (
+select e.nombre as estudiante, c.nombre as curso, i.nota from 
+inscripciones i
+join estudiantes e
+on i.estudiante_id = e.id
+join cursos c 
+on c.id = i.curso_id
+),cte_MaxNota AS (
+    SELECT estudiante, 
+           curso, 
+           nota,
+           ROW_NUMBER() OVER (PARTITION BY curso ORDER BY nota DESC) AS rn
+    FROM cte_NotaPorEstudiante
+)
+SELECT estudiante, curso, nota
+FROM cte_MaxNota
+WHERE rn = 1;
