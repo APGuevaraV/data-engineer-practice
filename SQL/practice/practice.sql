@@ -97,3 +97,12 @@ join ordenes o
 on o.cliente_id = c.id
 group by c.nombre
 having nr_ordenes > 1;
+
+-- Obtén el cliente con la compra más cara (orden de mayor total) 
+-- y muestra su nombre, ciudad y monto.
+
+select c.nombre , c.ciudad, o.total from 
+clientes c
+join ordenes o 
+on c.id = o.cliente_id
+where o.total in (select max(total) from ordenes)
