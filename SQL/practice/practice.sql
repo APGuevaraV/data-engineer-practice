@@ -61,3 +61,14 @@ on c.id = i.curso_id
 where c.categoria = 'Tecnología'
 group by e.nombre
 having COUNT(c.id) > 1;
+
+
+-- Obtén el total gastado por cada cliente, mostrando el nombre del cliente y 
+-- el monto total, ordenado de mayor a menor.
+
+select c.nombre, sum(o.total) as total from 
+clientes c 
+join ordenes o 
+on c.id = o.cliente_id
+group by c.nombre
+order by total desc;
