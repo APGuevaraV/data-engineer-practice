@@ -89,3 +89,11 @@ join detalle_orden deto
 on deto.producto_id = p.id
 group by p.nombre
 order by cantidad desc limit 1;
+
+-- Encuentra a los clientes que han hecho más de 1 orden.
+select c.nombre , count(o.id) as nr_ordenes from 
+clientes c
+join ordenes o
+on o.cliente_id = c.id
+group by c.nombre
+having nr_ordenes > 1;
