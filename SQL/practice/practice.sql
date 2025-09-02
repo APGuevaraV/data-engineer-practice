@@ -80,3 +80,12 @@ join detalle_orden deto
 on p.id = deto.producto_id
 group by p.categoria
 order by total desc;
+
+
+-- Muestra el producto más vendido en cantidad de unidades (no en dinero).
+select p.nombre , sum(deto.cantidad) as cantidad
+from productos p
+join detalle_orden deto
+on deto.producto_id = p.id
+group by p.nombre
+order by cantidad desc limit 1;
