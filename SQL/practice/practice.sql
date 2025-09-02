@@ -72,3 +72,11 @@ join ordenes o
 on c.id = o.cliente_id
 group by c.nombre
 order by total desc;
+
+-- Lista las categorías de productos junto con el monto total vendido en cada una.
+select p.categoria, sum(deto.cantidad * deto.precio_unitario) as total
+from productos p
+join detalle_orden deto
+on p.id = deto.producto_id
+group by p.categoria
+order by total desc;
