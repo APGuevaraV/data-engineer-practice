@@ -33,7 +33,7 @@ on c.id = i.curso_id
     SELECT estudiante, 
            curso, 
            nota,
-           ROW_NUMBER() OVER (PARTITION BY curso ORDER BY nota DESC) AS rn
+           ROW_NUMBER() OVER (PARTITION BY estudiante ORDER BY nota DESC) AS rn
     FROM cte_NotaPorEstudiante
 )
 SELECT estudiante, curso, nota
@@ -43,7 +43,7 @@ WHERE rn = 1;
 
 -- Muestra el número de estudiantes inscritos por categoría de curso.
 
-select c.categoria, count(e.nombre) cantidad_alumnos from
+select c.categoria, count(distinct e.nombre ) cantidad_alumnos from
 estudiantes e 
 join inscripciones i 
 on i.estudiante_id = e.id
@@ -60,4 +60,4 @@ join cursos c
 on c.id = i.curso_id
 where c.categoria = 'Tecnología'
 group by e.nombre
-having nro >1;
+having COUNT(c.id) > 1;
