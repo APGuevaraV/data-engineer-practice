@@ -15,11 +15,9 @@ on deto.producto_id = p.id
 group by p.categoria
 
 --Encuentra los clientes que han comprado más de un producto distinto en una misma orden.
-select c.id,c.nombre, count(distinct(deto.producto_id)) as nro 
-from clientes c
-join ordenes o 
-on c.id = o.cliente_id
-join detalleorden deto
-on deto.orden_id = o.id
-group by c.id
-having nro > 1;
+select p.nombre, sum(deto.cantidad) as nro, sum(deto.cantidad * p.precio) as total_vendido
+from productos p 
+join detalleorden deto 
+on p.id = deto.producto_id
+group by p.nombre
+order by nro desc limit 1
