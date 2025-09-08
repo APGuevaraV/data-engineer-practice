@@ -8,3 +8,8 @@ group by c.id
 order by total desc;
 
 -- Muestra las categorías de productos junto con el monto total vendido en cada una.
+select p.categoria, sum(p.precio * deto.cantidad) 
+from productos p
+join detalleorden deto
+on deto.producto_id = p.id
+group by p.categoria
