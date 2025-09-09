@@ -1,6 +1,9 @@
 from collections import defaultdict
 import pandas as pd
 import re
+import multiprocessing as mp
+import time
+
 
 empleados = [
     {"id": 1, "nombre": "Ana", "departamento": "IT", "salario": 5500},
@@ -65,3 +68,19 @@ for em in data['empleados']:
         rows.append({'nombre': em['nombre'], 'skill': skill})
 df3 = pd.DataFrame(rows)
 print(df3)
+
+
+def cuadrado(x):
+    return x * x
+
+
+numeros = list(range(1, 1000000))
+inicio = time.time()
+res_normal = [cuadrado(x) for x in numeros]
+print('Tiempo normal:', time.time() - inicio)
+
+inicio = time.time()
+with mp.Pool(processes=4) as pool:
+    res_multi = pool.map(cuadrado, numeros)
+
+print('Tiempo Multiprocesing:', time.time() - inicio)
