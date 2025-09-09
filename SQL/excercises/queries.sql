@@ -33,3 +33,12 @@ on c.id=o.cliente_id
 where year(o.fecha) = 2024
 group by c.nombre
 having nro_ordenes > 1;
+
+
+-- Obtén el producto más vendido (por cantidad total) y la cantidad total vendida.
+select p.nombre, sum(deto.cantidad) as nro, sum(deto.cantidad * p.precio) as total_vendido
+from productos p 
+join detalleorden deto 
+on p.id = deto.producto_id
+group by p.nombre
+order by nro desc limit 1
