@@ -48,3 +48,20 @@ emails = [
 patron = r'^[\w\.-]+@[\w\.-]+\.\w+$'
 validos = [email for email in emails if re.match(patron, email)]
 print(validos)
+
+
+data = {
+    "empresa": "TechSolutions",
+    "empleados": [
+        {"nombre": "Ana", "skills": ["Python", "SQL", "AWS"]},
+        {"nombre": "Luis", "skills": ["Java", "Spark"]},
+        {"nombre": "María", "skills": ["Python", "Airflow", "GCP"]}
+    ]
+}
+
+rows = []
+for em in data['empleados']:
+    for skill in em['skills']:
+        rows.append({'nombre': em['nombre'], 'skill': skill})
+df3 = pd.DataFrame(rows)
+print(df3)
