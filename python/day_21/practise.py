@@ -1,5 +1,6 @@
 from collections import defaultdict
 import pandas as pd
+import re
 
 empleados = [
     {"id": 1, "nombre": "Ana", "departamento": "IT", "salario": 5500},
@@ -34,3 +35,16 @@ df2 = pd.read_csv('csv/ventas.csv')
 df2['total'] = df2['cantidad'] * df2['precio']
 df2.to_csv('csv/reporte.csv', index=False)
 print(df2)
+
+
+emails = [
+    "ana@example.com",
+    "luis@empresa.com.pe",
+    "maria123@gmail.com",
+    "invalido@@.com",
+    "jorge@dominio"
+]
+
+patron = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+validos = [email for email in emails if re.match(patron, email)]
+print(validos)
