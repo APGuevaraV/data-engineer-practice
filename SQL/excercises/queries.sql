@@ -21,3 +21,15 @@ join detalleorden deto
 on p.id = deto.producto_id
 group by p.nombre
 order by nro desc limit 1
+
+
+-- Lista los clientes y la cantidad de órdenes realizadas en el año 2024,
+-- mostrando solo a los que tengan más de 1 orden.
+
+SELECT c.nombre, count(o.id) as nro_ordenes
+from clientes c 
+join ordenes o 
+on c.id=o.cliente_id
+where year(o.fecha) = 2024
+group by c.nombre
+having nro_ordenes > 1;
