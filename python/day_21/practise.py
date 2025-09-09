@@ -1,4 +1,5 @@
 from collections import defaultdict
+import pandas as pd
 
 empleados = [
     {"id": 1, "nombre": "Ana", "departamento": "IT", "salario": 5500},
@@ -19,3 +20,17 @@ promedio = {
 }
 
 print(promedio)
+
+
+# lectura y escritura de archivo csv
+df = pd.DataFrame({
+    "producto": ["Laptop", "Mouse", "Teclado", "Monitor"],
+    "cantidad": [3, 10, 5, 2],
+    "precio": [3000, 50, 150, 800]
+})
+
+df.to_csv('csv/ventas.csv', index=False, encoding='utf-8')
+df2 = pd.read_csv('csv/ventas.csv')
+df2['total'] = df2['cantidad'] * df2['precio']
+df2.to_csv('csv/reporte.csv', index=False)
+print(df2)
