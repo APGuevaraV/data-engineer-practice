@@ -50,3 +50,15 @@ def password_validation(password):
 
 password = 'Anapaula'
 password_validation(password)
+
+
+# contar ocurrencias
+texto = "Python es genial, y Python es poderoso. Me encanta Python!"
+formatted = texto.replace('.', '').replace(',', '').replace('!', '').lower()
+
+palabras = set(formatted.split())
+
+result = [(palabra, formatted.count(palabra))
+          for palabra in palabras if len(palabra) > 1]
+
+print(result)
