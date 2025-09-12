@@ -39,3 +39,21 @@ print(gb_dpto)
 maximos = df_employees.loc[df_employees.groupby(['Departamento'])[
     'Sueldo'].idxmax()]
 print(maximos)
+
+data = {
+    "Cliente": ["A", "B", "A", "C", "B", "C", "A"],
+    "Producto": ["Leche", "Pan", "Queso", "Leche", "Queso", "Pan", "Pan"],
+    "Precio": [5, 2, 10, 5, 10, 2, 2],
+    "Cantidad": [2, 5, 1, 3, 2, 4, 6],
+    "Fecha": pd.to_datetime(["2025-01-10", "2025-01-12", "2025-01-15",
+                             "2025-02-01", "2025-02-03", "2025-02-04",
+                             "2025-02-10"])
+}
+df_ventas = pd.DataFrame(data)
+df_ventas['Total'] = df_ventas['Cantidad']*df_ventas['Precio']
+grp = df_ventas.groupby('Cliente')['Total'].sum()
+print(grp)
+
+df_ventas['Mes'] = df_ventas['Fecha'].dt.to_period('M')
+maximos = df_ventas.groupby('Mes')['Total'].sum()
+print(maximos.idxmax())
