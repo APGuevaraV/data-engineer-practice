@@ -57,3 +57,19 @@ print(grp)
 df_ventas['Mes'] = df_ventas['Fecha'].dt.to_period('M')
 maximos = df_ventas.groupby('Mes')['Total'].sum()
 print(maximos.idxmax())
+
+
+data = {
+    "Vuelo": ["LA100", "LA101", "LA102", "LA103", "LA104", "LA105"],
+    "Origen": ["Lima", "Lima", "Santiago", "Bogotá", "Lima", "Quito"],
+    "Destino": ["Santiago", "Bogotá", "Lima", "Lima", "Quito", "Lima"],
+    "Pasajeros": [180, 150, 200, 170, 160, 140],
+    "Retraso_min": [30, 0, 15, 60, 10, 0]
+}
+df_fly = pd.DataFrame(data)
+
+promedio = df_fly.groupby('Origen')['Retraso_min'].mean()
+print(promedio)
+nro_pasajeros = df_fly.groupby('Destino')['Pasajeros'].sum()
+print(nro_pasajeros)
+print(nro_pasajeros.idxmax())
