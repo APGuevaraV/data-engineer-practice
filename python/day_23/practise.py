@@ -25,3 +25,17 @@ df_estudiantes['Promedio'] = df_estudiantes[[
     'Matemáticas', 'Historia', 'Inglés']].mean(axis=1)
 df_estudiantes['Aprobado'] = df_estudiantes['Promedio'] >= 14
 print(df_estudiantes)
+
+
+data = {
+    "Empleado": ["Juan", "Sofía", "Andrés", "Marta", "Pablo", "Lucía"],
+    "Departamento": ["IT", "IT", "Ventas", "Ventas", "RRHH", "RRHH"],
+    "Sueldo": [4500, 5000, 3000, 3200, 4000, 3800],
+    "Años_Experiencia": [5, 8, 2, 4, 6, 3]
+}
+df_employees = pd.DataFrame(data)
+gb_dpto = df_employees.groupby('Departamento')['Sueldo'].mean()
+print(gb_dpto)
+maximos = df_employees.loc[df_employees.groupby(['Departamento'])[
+    'Sueldo'].idxmax()]
+print(maximos)
