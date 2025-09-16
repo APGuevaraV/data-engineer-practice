@@ -1,0 +1,50 @@
+[
+    {
+        "ProductoID": 1,
+        "Nombre": "Laptop",
+        "Precio": 3500,
+        "VentaID": 101,
+        "Cantidad": 1,
+        "total": 3500
+    },
+    {
+        "ProductoID": 1,
+        "Nombre": "Laptop",
+        "Precio": 3500,
+        "VentaID": 106,
+        "Cantidad": 1,
+        "total": 3500
+    },
+    {
+        "ProductoID": 2,
+        "Nombre": "Mouse",
+        "Precio": 50,
+        "VentaID": 102,
+        "Cantidad": 3,
+        "total": 150
+    },
+    {
+        "ProductoID": 2,
+        "Nombre": "Mouse",
+        "Precio": 50,
+        "VentaID": 103,
+        "Cantidad": 2,
+        "total": 100
+    },
+    {
+        "ProductoID": 3,
+        "Nombre": "Teclado",
+        "Precio": 100,
+        "VentaID": 104,
+        "Cantidad": 5,
+        "total": 500
+    },
+    {
+        "ProductoID": 4,
+        "Nombre": "Monitor",
+        "Precio": 800,
+        "VentaID": 105,
+        "Cantidad": 2,
+        "total": 1600
+    }
+]

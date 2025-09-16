@@ -9,7 +9,7 @@ df_ventas = pd.DataFrame({
 
 anio_2023 = df_ventas[(df_ventas['Año'] ==
                       2023) & (df_ventas['Empleado'] == 'Ana')].sort_values(by='Ventas', ascending=False)
-# print(anio_2023)
+print(anio_2023)
 
 # Dataset 2: Productos
 df_productos = pd.DataFrame({
@@ -29,7 +29,8 @@ nuevo_df = pd.merge(df_productos, df_detalle, how='inner', on='ProductoID')
 nuevo_df['total'] = nuevo_df['Cantidad']*nuevo_df['Precio']
 gb_producto = nuevo_df.groupby('ProductoID')['total'].sum()
 print(gb_producto)
-gb_producto.to_csv('csv/detalle_ventas.csv', encoding='utf-8')
+nuevo_df.to_csv('csv/detalle_ventas.csv', encoding='utf-8', index=False)
+nuevo_df.to_json('json/detalle_ventas.json', orient='records')
 
 # Dataset 4: Clientes
 df_clientes = pd.DataFrame({
@@ -52,10 +53,10 @@ join_cliente_orden = pd.merge(
     how='inner',
     on='ClienteID'
 )
-# print(join_cliente_orden)
+print(join_cliente_orden)
 
 df_ventas_before = df_ventas[df_ventas['Año'] < 2024]
 df_ventas_from = df_ventas[df_ventas['Año'] >= 2024]
 
 concatenacion = pd.concat([df_ventas_before, df_ventas_from], axis=0)
-# print(concatenacion)
+print(concatenacion)

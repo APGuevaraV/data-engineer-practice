@@ -1,5 +1,7 @@
-ProductoID,total
-1,7000
-2,250
-3,500
-4,1600
+,ProductoID,Nombre,Precio,VentaID,Cantidad,total
+0,1,Laptop,3500,101,1,3500
+1,1,Laptop,3500,106,1,3500
+2,2,Mouse,50,102,3,150
+3,2,Mouse,50,103,2,100
+4,3,Teclado,100,104,5,500
+5,4,Monitor,800,105,2,1600
