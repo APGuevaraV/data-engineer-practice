@@ -28,7 +28,7 @@ df_detalle = pd.DataFrame({
 nuevo_df = pd.merge(df_productos, df_detalle, how='inner', on='ProductoID')
 nuevo_df['total'] = nuevo_df['Cantidad']*nuevo_df['Precio']
 gb_producto = nuevo_df.groupby('ProductoID')['total'].sum()
-print(gb_producto)
+# print(gb_producto)
 
 # Dataset 4: Clientes
 df_clientes = pd.DataFrame({
@@ -44,3 +44,11 @@ df_ordenes = pd.DataFrame({
     "Fecha": pd.to_datetime(["2024-01-15", "2024-01-20", "2024-02-10",
                              "2024-02-18", "2024-03-05", "2024-03-22"])
 })
+
+join_cliente_orden = pd.merge(
+    df_clientes,
+    df_ordenes,
+    how='inner',
+    on='ClienteID'
+)
+print(join_cliente_orden)
