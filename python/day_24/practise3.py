@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 # Dataset Ventas
 df_ventas = pd.DataFrame({
@@ -16,7 +17,7 @@ df_ventas = pd.DataFrame({
 
 df_ventas['total vendido'] = df_ventas['Cantidad'] * \
     df_ventas['PrecioUnitario']
-gb_total = df_ventas.groupby(['Empleado', 'Producto'])['PrecioUnitario'].sum()
+gb_total = df_ventas.groupby(['Empleado', 'Producto'])['total vendido'].sum()
 # print(gb_total)
 
 # Dataset Objetivos de venta
@@ -24,6 +25,21 @@ df_objetivos = pd.DataFrame({
     "Empleado": ["Ana", "Luis", "Pedro"],
     "ObjetivoMensual": [5000, 4000, 3000]
 })
+
+join_ventas = pd.merge(
+    df_ventas,
+    df_objetivos,
+    how='inner',
+    on='Empleado'
+)
+ventas_2024 = join_ventas[join_ventas['Fecha'].dt.year == 2024]
+ventas_2024['Cumplimiento'] = np.where(
+    ventas_2024['total vendido'] < ventas_2024['ObjetivoMensual'],
+    'No',
+    'Sí'
+)
+
+print(ventas_2024)
 
 # Dataset Clientes
 df_clientes = pd.DataFrame({
