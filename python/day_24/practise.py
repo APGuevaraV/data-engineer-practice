@@ -51,4 +51,10 @@ join_cliente_orden = pd.merge(
     how='inner',
     on='ClienteID'
 )
-print(join_cliente_orden)
+# print(join_cliente_orden)
+
+df_ventas_before = df_ventas[df_ventas['Año'] < 2024]
+df_ventas_from = df_ventas[df_ventas['Año'] >= 2024]
+
+concatenacion = pd.concat([df_ventas_before, df_ventas_from], axis=0)
+print(concatenacion)
