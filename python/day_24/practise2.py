@@ -36,7 +36,9 @@ df_join = pd.merge(df_join, df_proyectos,
                    how='inner',
                    on='ProyectoID')
 print(df_join[['EmpleadoID', 'Departamento_x', 'ProyectoID', 'Horas']])
-
+result = df_join[df_join['Horas'] > 30]
+result.to_csv('csv/asignacion_horas.csv', encoding='utf-8', index=False)
+print(result)
 # Dataset D: Ventas mensuales
 df_ventas_mensuales = pd.DataFrame({
     "Mes": ["Enero", "Febrero", "Marzo", "Abril", "Mayo"],
@@ -59,3 +61,12 @@ df_inventario = pd.DataFrame({
     "Stock": [10, 200, 150, 50, 80],
     "PrecioUnitario": [3500, 40, 100, 800, 150]
 })
+
+df_inventario['CategoriaStock'] = df_inventario['Stock'].apply(
+    lambda x:
+        'Alto' if x > 100 else
+        'Medio' if 50 <= x <= 100
+        else 'Bajo'
+)
+
+print(df_inventario)

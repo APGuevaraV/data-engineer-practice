@@ -1,0 +1,4 @@
+EmpleadoID,Nombre,Departamento_x,Salario,ProyectoID,Horas,NombreProyecto,Departamento_y
+1,Ana,Ventas,3000,103,40,Dashboard BI,Ventas
+2,Luis,Ventas,3500,103,35,Dashboard BI,Ventas
+3,Pedro,TI,4000,101,50,Migración Cloud,TI
