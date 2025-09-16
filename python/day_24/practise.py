@@ -26,7 +26,9 @@ df_detalle = pd.DataFrame({
 })
 
 nuevo_df = pd.merge(df_productos, df_detalle, how='inner', on='ProductoID')
-print(nuevo_df)
+nuevo_df['total'] = nuevo_df['Cantidad']*nuevo_df['Precio']
+gb_producto = nuevo_df.groupby('ProductoID')['total'].sum()
+print(gb_producto)
 
 # Dataset 4: Clientes
 df_clientes = pd.DataFrame({
