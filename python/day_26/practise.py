@@ -26,7 +26,7 @@ df_objetivos = pd.DataFrame({
 df_join = pd.merge(
     df_ventas,
     df_objetivos,
-    how='left',
+    how='inner',
     on='Empleado'
 )
 df_join['TotalVendido'] = df_join['Cantidad']*df_join['PrecioUnitario']
@@ -51,7 +51,7 @@ df_concatenado = pd.concat(
     axis=0
 )
 df_concatenado.drop_duplicates(inplace=True)
-df_concatenado.reset_index()
+df_concatenado.reset_index(drop=True, inplace=True)
 print(df_concatenado)
 
 
@@ -68,7 +68,7 @@ join_df_facturas = pd.merge(
     df_facturas,
     how='left',
     on='ClienteID'
-)
+)[["ClienteID", "Nombre", "Ciudad", "Monto"]]
 print(join_df_facturas)
 
 
