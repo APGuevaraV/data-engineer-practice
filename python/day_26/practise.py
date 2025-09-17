@@ -53,3 +53,20 @@ df_concatenado = pd.concat(
 df_concatenado.drop_duplicates(inplace=True)
 df_concatenado.reset_index()
 print(df_concatenado)
+
+
+df_facturas = pd.DataFrame({
+    "FacturaID": [101, 102, 103, 104, 105, 106],
+    "ClienteID": [1, 2, 3, 1, 5, 6],
+    "Monto": [500, 1200, 800, 300, 1500, 700],
+    "Fecha": pd.to_datetime(["2025-01-05", "2025-01-10", "2025-01-15",
+                             "2025-02-01", "2025-02-05", "2025-02-10"])
+})
+
+join_df_facturas = pd.merge(
+    df_clientes,
+    df_facturas,
+    how='left',
+    on='ClienteID'
+)
+print(join_df_facturas)
