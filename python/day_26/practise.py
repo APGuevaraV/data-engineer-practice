@@ -15,7 +15,7 @@ df_ventas_resumen = df_ventas[df_ventas['Año'] == 2025].copy()
 df_ventas_resumen.sort_values(
     by=['Empleado', 'Cantidad'], ascending=[True, False], inplace=True)
 df_ventas_resumen.reset_index(inplace=True, drop=True)
-# print(df_ventas_resumen)
+print(df_ventas_resumen)
 
 
 df_objetivos = pd.DataFrame({
@@ -30,7 +30,7 @@ df_join = pd.merge(
     on='Empleado'
 )
 df_join['TotalVendido'] = df_join['Cantidad']*df_join['PrecioUnitario']
-# print(df_join)
+print(df_join)
 
 
 df_clientes = pd.DataFrame({
@@ -70,3 +70,16 @@ join_df_facturas = pd.merge(
     on='ClienteID'
 )
 print(join_df_facturas)
+
+
+df_productos = pd.DataFrame({
+    "ProductoID": [1, 2, 3, 4],
+    "NombreProducto": ["Laptop", "Mouse", "Teclado", "Monitor"],
+    "PrecioUnitario": [3000, 100, 200, 800]
+})
+
+df_productos.to_csv('productos.csv', index=False)
+df_productos.to_json('productos.json', orient='records')
+
+df_reader = pd.read_csv('productos.csv', encoding='utf-8')
+print(df_reader)
