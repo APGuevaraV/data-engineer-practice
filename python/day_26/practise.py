@@ -30,4 +30,26 @@ df_join = pd.merge(
     on='Empleado'
 )
 df_join['TotalVendido'] = df_join['Cantidad']*df_join['PrecioUnitario']
-print(df_join)
+# print(df_join)
+
+
+df_clientes = pd.DataFrame({
+    "ClienteID": [1, 2, 3, 4, 5],
+    "Nombre": ["Carlos", "Lucía", "Andrés", "María", "Elena"],
+    "Ciudad": ["Lima", "Trujillo", "Lima", "Arequipa", "Trujillo"]
+})
+
+df_clientes_nuevos = pd.DataFrame({
+    "ClienteID": [3, 6, 7],
+    "Nombre": ["Andrés", "Sofía", "Diego"],
+    "Ciudad": ["Lima", "Cusco", "Lima"]
+})
+
+df_concatenado = pd.concat(
+    [df_clientes,
+     df_clientes_nuevos],
+    axis=0
+)
+df_concatenado.drop_duplicates(inplace=True)
+df_concatenado.reset_index()
+print(df_concatenado)
