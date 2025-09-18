@@ -16,3 +16,6 @@ print(df_new)
 
 df['total ventas'] = df.groupby('Region')['Ventas'].transform('sum')
 print(df)
+
+subset = df.query("Ventas > 1000 and Año== 2025")
+print(subset)
