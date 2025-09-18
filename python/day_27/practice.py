@@ -59,3 +59,7 @@ df_bono = df_empleados.assign(
         else row['Salario']*0.05, axis=1)
 )
 print(df_bono)
+
+df_empleados['Salario promedio'] = df_empleados.groupby(
+    'Departamento')['Salario'].transform('mean')
+print(df_empleados)
