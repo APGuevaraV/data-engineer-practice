@@ -75,3 +75,13 @@ print(df_empleados)
 
 resum = df_empleados.query("Departamento == 'Ventas' and Salario > 2800")
 print(resum)
+
+df_10 = df_empleados.assign(
+    AñosEnEmpresa=lambda x: 2025 - x['AñoIngreso']
+)
+df_10['AntiguedadCategoria'] = df_10['AñosEnEmpresa'].apply(
+    lambda anio: 'Nuevo' if anio < 5 else
+    'Intermedio' if 5 <= anio <= 10
+    else 'Veterano'
+)
+print(df_10)
