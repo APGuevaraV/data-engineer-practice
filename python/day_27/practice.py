@@ -85,3 +85,26 @@ df_10['AntiguedadCategoria'] = df_10['AñosEnEmpresa'].apply(
     else 'Veterano'
 )
 print(df_10)
+
+
+# DF de ventas
+df_ventas_3 = pd.DataFrame({
+    'Empleado': ['Ana', 'Luis', 'Ana', 'María', 'Luis', 'Pedro'],
+    'Producto': ['Laptop', 'Mouse', 'Teclado', 'Laptop', 'Monitor', 'Mouse'],
+    'Cantidad': [2, 5, 3, 1, 2, 4],
+    'PrecioUnitario': [3000, 150, 200, 3200, 800, 120],
+    'Año': [2024, 2025, 2025, 2024, 2025, 2025]
+})
+
+# DF de empleados
+df_empleados_2 = pd.DataFrame({
+    'Empleado': ['Ana', 'Luis', 'María', 'Pedro'],
+    'Departamento': ['Ventas', 'Ventas', 'Marketing', 'Soporte'],
+    'AñoIngreso': [2018, 2020, 2012, 2015]
+})
+
+new = df_ventas_3.assign(
+    Total=lambda x: x['Cantidad'] * x['PrecioUnitario']
+)
+
+print(new)
