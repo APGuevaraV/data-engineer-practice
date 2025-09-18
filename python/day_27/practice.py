@@ -126,3 +126,5 @@ new_empleados = df_empleados_2.assign(
 new_empleados['Mediana'] = new_empleados.groupby('Departamento')[
     'AniosEnEmpresa'].transform('median')
 print(new_empleados)
+
+print(new.query("Año == 2025 and Cantidad >2 "))
