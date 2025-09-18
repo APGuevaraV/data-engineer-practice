@@ -103,3 +103,41 @@ print(gb)
 
 gb_prod = df_ventas_2.loc[df_ventas_2.groupby('Empleado')['Cantidad'].idxmax()]
 print(gb_prod)
+
+
+# Primero creamos una columna con el total vendido
+df_ventas["Total"] = df_ventas["Cantidad"] * df_ventas["PrecioUnitario"]
+
+# Calculamos el porcentaje por año usando transform
+df_ventas["PorcentajeAño"] = (
+    df_ventas["Total"] / df_ventas.groupby("Año")["Total"].transform("sum")
+) * 100
+
+print(df_ventas)
+
+df_objetivos = pd.DataFrame({
+    "Empleado": ["Ana", "Luis", "Marta", "Pedro"],
+    "Objetivo2024": [8000, 5000, 9000, 7000],
+    "Objetivo2025": [10000, 8000, 12000, 9000]
+})
+
+# Primero creamos el total vendido por empleado y año
+df_totales = (
+    df_ventas.assign(Total=lambda x: x["Cantidad"] * x["PrecioUnitario"])
+    .groupby(["Empleado", "Año"], as_index=False)["Total"]
+    .sum()
+)
+
+# Hacemos el join con los objetivos
+df_join = pd.merge(df_totales, df_objetivos, on="Empleado", how="left")
+
+# Comparamos según el año
+df_join["Cumplió"] = df_join.apply(
+    lambda row: "Sí" if (
+        (row["Año"] == 2024 and row["Total"] >= row["Objetivo2024"]) or
+        (row["Año"] == 2025 and row["Total"] >= row["Objetivo2025"])
+    ) else "No",
+    axis=1
+)
+
+print(df_join)
