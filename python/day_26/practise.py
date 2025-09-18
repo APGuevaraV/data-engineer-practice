@@ -141,3 +141,11 @@ df_join["Cumplió"] = df_join.apply(
 )
 
 print(df_join)
+
+
+df_facturas['CategoriaVenta'] = df_facturas['Monto'].apply(
+    lambda x: 'Bajo' if x < 50 else
+    'Medio' if 500 <= x <= 2000
+    else 'Alto'
+)
+print(df_facturas)
