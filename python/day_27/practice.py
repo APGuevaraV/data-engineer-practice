@@ -19,3 +19,18 @@ print(df)
 
 subset = df.query("Ventas > 1000 and Año== 2025")
 print(subset)
+
+
+def categoria(ventas):
+    if ventas > 1500:
+        return 'Alto'
+    elif 1000 <= ventas <= 1500:
+        return 'Medio'
+    else:
+        return 'Bajo'
+
+
+df['Categoria'] = df['Ventas'].apply(
+    lambda x: categoria(x)
+)
+print(df)
