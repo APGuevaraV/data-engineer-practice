@@ -128,3 +128,19 @@ new_empleados['Mediana'] = new_empleados.groupby('Departamento')[
 print(new_empleados)
 
 print(new.query("Año == 2025 and Cantidad >2 "))
+
+
+merge = pd.merge(
+    new,
+    new_empleados,
+    on='Empleado',
+    how='inner'
+)
+merge['Bonificación'] = merge['Departamento'].apply(
+    lambda dpto:
+        500 if dpto == 'Ventas' else
+        300 if dpto == 'Marketing'
+        else 200
+)
+
+print(merge)
