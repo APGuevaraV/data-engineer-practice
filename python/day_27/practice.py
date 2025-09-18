@@ -116,3 +116,13 @@ new['CategoriaVenta'] = new['Total'].apply(
 )
 
 print(new)
+
+new_empleados = df_empleados_2.assign(
+    AniosEnEmpresa=lambda x: x.apply(
+        lambda row: 2025 - row['AñoIngreso'], axis=1
+    )
+)
+
+new_empleados['Mediana'] = new_empleados.groupby('Departamento')[
+    'AniosEnEmpresa'].transform('median')
+print(new_empleados)
