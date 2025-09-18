@@ -108,3 +108,11 @@ new = df_ventas_3.assign(
 )
 
 print(new)
+
+new['CategoriaVenta'] = new['Total'].apply(
+    lambda total: 'Alta' if total >= 2000 else
+    'Media' if 1000 <= total <= 2000
+    else 'Baja'
+)
+
+print(new)
