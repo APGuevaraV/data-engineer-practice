@@ -13,3 +13,6 @@ df_new = df.assign(
 )
 
 print(df_new)
+
+df['total ventas'] = df.groupby('Region')['Ventas'].transform('sum')
+print(df)
