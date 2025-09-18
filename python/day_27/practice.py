@@ -34,3 +34,8 @@ df['Categoria'] = df['Ventas'].apply(
     lambda x: categoria(x)
 )
 print(df)
+
+df_new = df.assign(
+    Bonus=lambda x: x['Ventas']*0.1
+)
+print(df_new.query("Region =='Lima' "))
