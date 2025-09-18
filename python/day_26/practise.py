@@ -100,3 +100,6 @@ df_ventas_2['Total vendido'] = df_ventas_2['Cantidad'] * \
 gb = df_ventas_2.groupby(['Empleado', 'Año'])[
     'Total vendido'].agg(['sum', 'mean', 'count'])
 print(gb)
+
+gb_prod = df_ventas_2.loc[df_ventas_2.groupby('Empleado')['Cantidad'].idxmax()]
+print(gb_prod)
