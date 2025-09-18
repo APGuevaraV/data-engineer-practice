@@ -63,3 +63,12 @@ print(df_bono)
 df_empleados['Salario promedio'] = df_empleados.groupby(
     'Departamento')['Salario'].transform('mean')
 print(df_empleados)
+
+df_empleados['Nivel'] = df_empleados['Edad'].apply(
+    lambda x:
+        'Junior' if x < 30 else
+        'Senior' if 30 <= x <= 39
+        else 'Experto'
+
+)
+print(df_empleados)
