@@ -72,3 +72,6 @@ df_empleados['Nivel'] = df_empleados['Edad'].apply(
 
 )
 print(df_empleados)
+
+resum = df_empleados.query("Departamento == 'Ventas' and Salario > 2800")
+print(resum)
