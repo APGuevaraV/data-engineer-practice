@@ -115,3 +115,25 @@ def load_to_server(df_cliente_clean, df_deuda_clean, file_cliente, file_deuda):
 
     df_cliente_clean.to_csv(file_cliente, index=False)
     df_deuda_clean.to_csv(file_deuda, index=False)
+
+
+def load_to_sql(df_deuda_clean, tabla_deuda):
+
+    engine = create_engine('sqlite:///database/my_database.db')
+    df_deuda_clean.to_sql(tabla_deuda, con=engine,
+                          index=False, if_exists='replace')
+
+
+def main():
+    setup()
+    print('Iniciando ETL...')
+    df_cliente_raw, df_deuda_raw = extract(file_path)
+    df_cliente_clean, df_deuda_clean = transform(df_cliente_raw, df_deuda_raw)
+    load_to_server(df_cliente_clean, df_deuda_clean, file_cliente, file_deuda)
+    # bonus
+    load_to_sql(df_deuda_clean, tabla_deuda)
+    print('ETL completo')
+
+
+if __name__ == '__main__':
+    main()
