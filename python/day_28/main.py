@@ -29,3 +29,12 @@ def setup():
     git_path = 'https://raw.githubusercontent.com/AngelTintaya/datasets/refs/heads/main/file.ope'
 
     pd.read_csv(git_path).to_csv(file_path, index=False)
+
+
+def extract(file):
+    # EXTRACT
+    df = pd.read_csv(file)
+    df['Type'] = df['Field_1'].astype('str').str[0]
+    df_cliente = df[df['Type'] == '1'].reset_index(drop=True).copy()
+    df_deuda = df[df['Type'] == '2'].reset_index(drop=True).copy()
+    return df_cliente, df_deuda
