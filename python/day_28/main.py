@@ -104,3 +104,14 @@ def transform(df_cliente_raw, df_deuda_raw):
     df_deuda_raw.drop(columns=['Field_1', 'Type'], inplace=True)
 
     return df_cliente_clean, df_deuda_raw
+
+
+def load_to_server(df_cliente_clean, df_deuda_clean, file_cliente, file_deuda):
+
+    if os.path.exists(file_cliente):
+        os.remove(file_cliente)
+    if os.path.exists(file_deuda):
+        os.remove(file_deuda)
+
+    df_cliente_clean.to_csv(file_cliente, index=False)
+    df_deuda_clean.to_csv(file_deuda, index=False)
