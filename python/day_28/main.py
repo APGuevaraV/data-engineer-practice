@@ -20,8 +20,7 @@ def setup():
         if os.path.exists(folder):
             shutil.rmtree(folder)
 
-    # Generando archivos iniciales
-
+# Generando archivos iniciales
     os.mkdir('database')
     os.mkdir('server_inputs')
     os.mkdir('server_outputs')
@@ -31,8 +30,8 @@ def setup():
     pd.read_csv(git_path).to_csv(file_path, index=False)
 
 
+# EXTRACT
 def extract(file):
-    # EXTRACT
     df = pd.read_csv(file)
     df['Type'] = df['Field_1'].astype('str').str[0]
     df_cliente = df[df['Type'] == '1'].reset_index(drop=True).copy()
@@ -40,8 +39,8 @@ def extract(file):
     return df_cliente, df_deuda
 
 
+# TRANSFORM
 def transform(df_cliente_raw, df_deuda_raw):
-    # Transform
     # Cliente
     df_cliente_clean = df_cliente_raw['Field_1'].astype(
         'str').str[1:].str.split('|', expand=True)
@@ -102,10 +101,11 @@ def transform(df_cliente_raw, df_deuda_raw):
 
     df_deuda_raw.rename(columns=headers_deuda, inplace=True)
     df_deuda_raw.drop(columns=['Field_1', 'Type'], inplace=True)
+    df_deuda_clean = df_deuda_raw.copy()
+    return df_cliente_clean, df_deuda_clean
 
-    return df_cliente_clean, df_deuda_raw
 
-
+# LOAD
 def load_to_server(df_cliente_clean, df_deuda_clean, file_cliente, file_deuda):
 
     if os.path.exists(file_cliente):
@@ -117,9 +117,10 @@ def load_to_server(df_cliente_clean, df_deuda_clean, file_cliente, file_deuda):
     df_deuda_clean.to_csv(file_deuda, index=False)
 
 
+# BONUS
 def load_to_sql(df_deuda_clean, tabla_deuda):
 
-    engine = create_engine('sqlite:///database/my_database.db')
+    engine = create_engine('sqlite:///database/database.db')
     df_deuda_clean.to_sql(tabla_deuda, con=engine,
                           index=False, if_exists='replace')
 
