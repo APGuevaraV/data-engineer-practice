@@ -55,3 +55,12 @@ join LIBROS l
 on a.autor_id = l.autor_id
 group by a.nombre
 order by cantidad desc;
+
+--Lista los usuarios que realizaron al menos un préstamo en 2023 y cuántos préstamos hicieron ese año.
+SELECT u.nombre,count(p.prestamo_id) as cantidad
+FROM USUARIOS u
+join Prestamos p
+on u.usuario_id = p.usuario_id
+where YEAR(p.fecha_prestamo) = '2023'
+group by u.nombre
+order by cantidad desc;
