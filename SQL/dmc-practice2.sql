@@ -34,3 +34,12 @@ join VENTAS v
 ON p.producto_id = v.producto_id
 GROUP BY p.producto_id,p.nombre
 ORDER BY total DESC;
+
+----Muestra la categoría de producto y la cantidad total de unidades vendidas en 2023.
+SELECT p.categoria, sum(v.cantidad) as total
+from PRODUCTOS p
+join VENTAS v
+on p.producto_id = v.producto_id
+where YEAR(v.fecha)=2023
+GROUP BY p.categoria
+ORDER BY total desc;
