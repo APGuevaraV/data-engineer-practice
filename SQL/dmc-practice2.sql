@@ -64,3 +64,12 @@ on u.usuario_id = p.usuario_id
 where YEAR(p.fecha_prestamo) = '2023'
 group by u.nombre
 order by cantidad desc;
+
+--Muestra los títulos de los libros que todavía no han sido devueltos junto con el nombre del usuario que los tiene.
+SELECT l.titulo,u.nombre
+FROM LIBROS l
+join Prestamos p
+on l.libro_id = p.libro_id
+join USUARIOS u
+on p.usuario_id = u.usuario_id
+where p.fecha_devolucion is null;
