@@ -43,3 +43,7 @@ on p.producto_id = v.producto_id
 where YEAR(v.fecha)=2023
 GROUP BY p.categoria
 ORDER BY total desc;
+
+
+SELECT nombre,departamento,DATEDIFF(YEAR, FECHA_CONTRATACION,GETDATE()) as years
+FROM EMPLEADOS order by years desc;
