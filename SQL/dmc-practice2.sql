@@ -25,3 +25,12 @@ WHERE e.salario = (
     FROM Empleados
     WHERE departamento = e.departamento
 );
+
+
+--Muestra los 3 productos más vendidos en cantidad (no en dinero).
+SELECT TOP 3 p.producto_id, p.nombre , sum(v.cantidad) as total
+from PRODUCTOS p
+join VENTAS v
+ON p.producto_id = v.producto_id
+GROUP BY p.producto_id,p.nombre
+ORDER BY total DESC;
