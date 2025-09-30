@@ -73,3 +73,10 @@ on l.libro_id = p.libro_id
 join USUARIOS u
 on p.usuario_id = u.usuario_id
 where p.fecha_devolucion is null;
+
+--Libros publicados antes de 1970
+SELECT l.titulo,a.nombre,l.anio_publicacion
+from LIBROS l
+join AUTORES a
+on l.autor_id = a.autor_id
+where l.anio_publicacion < 1970;
