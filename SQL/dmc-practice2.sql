@@ -47,3 +47,11 @@ ORDER BY total desc;
 
 SELECT nombre,departamento,DATEDIFF(YEAR, FECHA_CONTRATACION,GETDATE()) as years
 FROM EMPLEADOS order by years desc;
+
+---Muestra el nombre del autor y la cantidad de libros que tiene registrados en la biblioteca.
+SELECT a.nombre, count(l.libro_id) as cantidad
+FROM AUTORES a
+join LIBROS l
+on a.autor_id = l.autor_id
+group by a.nombre
+order by cantidad desc;
