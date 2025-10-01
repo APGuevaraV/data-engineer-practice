@@ -80,3 +80,11 @@ from LIBROS l
 join AUTORES a
 on l.autor_id = a.autor_id
 where l.anio_publicacion < 1970;
+
+--Encuentra el título del libro que más veces ha sido prestado, junto con el número de veces.
+SELECT TOP 1 l.titulo,count(p.prestamo_id) as cantidad
+FROM LIBROS l
+join PRESTAMOS p
+on l.libro_id = p.libro_id
+group by l.titulo
+order by cantidad desc;
