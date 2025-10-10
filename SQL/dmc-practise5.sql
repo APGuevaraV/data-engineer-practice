@@ -32,3 +32,13 @@ inner join [dbo].[TB_TIPO_SEGURO] b
         on a.cd_producto = b.codigo
      group by  rollup (a.MES_CORTE,b.tipo,b.SUBTIPO)
 	 order by 1,2,3
+
+select a.MES_CORTE,
+		   b.tipo,
+		   b.SUBTIPO,
+	       sum(im_capital_asegurado)
+	  from [dbo].[TB_SEGURO]      a
+inner join [dbo].[TB_TIPO_SEGURO] b
+        on a.cd_producto = b.codigo
+     group by  cube (a.MES_CORTE,b.tipo,b.SUBTIPO)
+	 order by 1,2,3
