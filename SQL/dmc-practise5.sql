@@ -1,3 +1,24 @@
+CREATE TABLE Ventas (
+    Año INT,
+    Mes VARCHAR(10),
+    Categoria VARCHAR(50),
+    Monto DECIMAL(10,2)
+);
+INSERT INTO Ventas (Año,
+  Mes,
+  Categoria,
+  Monto)
+VALUES
+(2025, 'Enero', 'Electrónica', 1000),
+(2025, 'Enero', 'Ropa', 500),
+(2025, 'Febrero', 'Electrónica', 1200),
+(2025, 'Febrero', 'Ropa', 600),
+(2025, 'Febrero', 'Alimentos', 300),
+(2024, 'Enero', 'Electrónica', 800),
+(2024, 'Enero', 'Ropa', 400),
+(2024, 'Febrero', 'Electrónica', 900),
+(2024, 'Febrero', 'Alimentos', 200);
+
 SELECT Año, Mes,Categoria , SUM(Monto) AS Total
 FROM Ventas
 GROUP BY ROLLUP(Año, Mes,Categoria)
