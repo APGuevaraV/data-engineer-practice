@@ -58,9 +58,25 @@ df_diferencia['nivel_antiguedad'] = df_diferencia['Años_servicio'].apply(
 )
 
 result = df_diferencia[['empleado', 'Años_servicio', 'nivel_antiguedad']]
-print(result)
-# 2️⃣ Crea una columna "nivel_antiguedad" que clasifique:
-#     - 'Senior' si años >= 5
-#     - 'Semi-senior' si entre 2 y 4 años
-#     - 'Junior' si < 2 años
-# 3️⃣ Muestra solo las columnas empleado, años_servicio y nivel_antiguedad.
+# print(result)
+
+
+ventas = pd.DataFrame({
+    'vendedor_id': [1, 2, 3, 1, 2],
+    'monto': [2000, 1500, 3000, 2500, 1800]
+})
+
+comisiones = pd.DataFrame({
+    'vendedor_id': [1, 2, 3],
+    'porcentaje': [0.05, 0.07, 0.06]
+})
+
+merged = ventas.merge(comisiones,
+                      how='inner',
+                      on='vendedor_id')
+
+plus_comision = merged.assign(
+    comision_total=lambda x: x['monto']*x['porcentaje'])
+
+gb_vendedor = plus_comision.groupby('vendedor_id')[['comision_total']].sum()
+print(gb_vendedor)
