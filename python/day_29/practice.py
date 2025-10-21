@@ -79,4 +79,27 @@ plus_comision = merged.assign(
     comision_total=lambda x: x['monto']*x['porcentaje'])
 
 gb_vendedor = plus_comision.groupby('vendedor_id')[['comision_total']].sum()
-print(gb_vendedor)
+# print(gb_vendedor)
+
+
+data_4 = {
+    'estudiante': ['Ana', 'Luis', 'Marcos', 'Ana', 'Luis', 'Marcos'],
+    'curso': ['Matemática', 'Matemática', 'Matemática', 'Historia', 'Historia', 'Historia'],
+    'nota': [18, 15, 12, 17, 16, 13]
+}
+
+df_st = pd.DataFrame(data_4)
+
+pivot_table = pd.pivot_table(df_st,
+                             index='estudiante',
+                             columns='curso',
+                             values='nota'
+                             )
+
+pivot_table = pivot_table.assign(promedio=pivot_table.mean(axis=1))
+melted = pivot_table.reset_index().melt(
+    id_vars='estudiante',
+    var_name='curso',
+    value_name='nota'
+)
+print(melted)
