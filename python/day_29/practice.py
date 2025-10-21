@@ -39,4 +39,28 @@ df_employees_clean['salario'] = df_employees_clean['salario'].fillna(
 
 df_employees_clean_result = df_employees_clean[df_employees_clean['salario']
                                                > df_employees_clean['salario'].mean()]
-print(df_employees_clean_result)
+# print(df_employees_clean_result)
+
+
+data_3 = {
+    'empleado': ['Ana', 'Luis', 'Marcos', 'Elena', 'Sofía'],
+    'fecha_ingreso': pd.to_datetime(['2019-03-01', '2020-07-15', '2022-01-10', '2021-05-20', '2023-02-01']),
+    'fecha_actual': pd.to_datetime(['2025-10-21'] * 5)
+}
+
+df_dates = pd.DataFrame(data_3)
+df_diferencia = df_dates.assign(
+    Años_servicio=lambda x: (x['fecha_actual'] - x['fecha_ingreso']).dt.days / 365.25)
+df_diferencia['nivel_antiguedad'] = df_diferencia['Años_servicio'].apply(
+    lambda x: 'Senior' if x >= 5 else
+    'Semi-senior' if 2 <= x < 5
+    else 'Junior'
+)
+
+result = df_diferencia[['empleado', 'Años_servicio', 'nivel_antiguedad']]
+print(result)
+# 2️⃣ Crea una columna "nivel_antiguedad" que clasifique:
+#     - 'Senior' si años >= 5
+#     - 'Semi-senior' si entre 2 y 4 años
+#     - 'Junior' si < 2 años
+# 3️⃣ Muestra solo las columnas empleado, años_servicio y nivel_antiguedad.
